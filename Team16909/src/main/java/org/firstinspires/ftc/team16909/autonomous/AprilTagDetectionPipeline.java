@@ -53,7 +53,7 @@ class AprilTagDetectionPipeline extends OpenCvPipeline
     Scalar green = new Scalar(0,255,0,255);
     Scalar white = new Scalar(255,255,255,255);
 
-    double fx;
+    double fx;              //fx and fy represent focal lengths and cx cy represent camera principal point
     double fy;
     double cx;
     double cy;
@@ -63,7 +63,7 @@ class AprilTagDetectionPipeline extends OpenCvPipeline
     double tagsizeX;
     double tagsizeY;
 
-    private float decimation;
+    private float decimation;                       //decimation reduces sample rate to reduce cost of processing
     private boolean needToSetDecimation;
     private final Object decimationSync = new Object();
 
@@ -116,7 +116,7 @@ class AprilTagDetectionPipeline extends OpenCvPipeline
 
         // Run AprilTag
         detections = AprilTagDetectorJNI.runAprilTagDetectorSimple(nativeApriltagPtr, grey, tagsize, fx, fy, cx, cy);
-
+                                                                                                //returns Apriltag arraylist
         synchronized (detectionsUpdateSync)
         {
             detectionsUpdate = detections;

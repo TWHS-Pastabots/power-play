@@ -21,6 +21,7 @@
 
 package org.firstinspires.ftc.team16909.autonomous;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -33,7 +34,7 @@ import org.openftc.easyopencv.OpenCvInternalCamera;
 
 import java.util.ArrayList;
 
-@TeleOp
+@Autonomous (name = "autonInitDetection")
 public class AprilTagAutonomousInitDetection extends LinearOpMode
 {
     OpenCvCamera camera;
@@ -54,9 +55,9 @@ public class AprilTagAutonomousInitDetection extends LinearOpMode
     double tagsize = 0.166;
 
     // Tag ID 1, 2, 3 from the 36h11 family
-    int LEFT = 1;
-    int MIDDLE = 2;
-    int RIGHT = 3;
+    int LEFT = 21;
+    int MIDDLE = 22;
+    int RIGHT = 23;
 
     AprilTagDetection tagOfInterest = null;
 
