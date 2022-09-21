@@ -22,6 +22,7 @@ public class Rigatoni extends OpMode {
     @Override
     public void loop() {
         drive();
+        moveArm();
     }
     public void drive() {
         // Mecanum drivecode
@@ -82,5 +83,9 @@ public class Rigatoni extends OpMode {
         hardware.leftRear.setPower(leftRearPower * slowConstant);
         hardware.rightFront.setPower(rightFrontPower * slowConstant);
         hardware.rightRear.setPower(rightRearPower * slowConstant);
+    }
+    public void moveArm()
+    {
+        
     }
 }
