@@ -28,6 +28,13 @@ public class RigatoniHardware
     public void init(HardwareMap hardwareMap)
     {
         Assert.assertNotNull(hardwareMap);
+        initializePrimaryMotors(hardwareMap);
+        initializeClawServos(hardwareMap);
+        
+
+    }
+    public void initializePrimaryMotors(HardwareMap hardwareMap)
+    {
         motors = new DcMotorEx[]{leftFront, leftRear, rightFront, rightRear, liftArm};
 
 
@@ -47,9 +54,7 @@ public class RigatoniHardware
         liftArm = hardwareMap.get(DcMotorEx.class, RigatoniIds.LIFT_ARM_MOTOR);
 
 
-        // CLaw Servos
-        grabServo = hardwareMap.get(Servo.class, RigatoniIds.GRAB_SERVO);
-        rotServo = hardwareMap.get(Servo.class, RigatoniIds.ROT_SERVO);
+        
 
 
         // Set Zero Power Behavior and Initialize Motors
@@ -59,6 +64,12 @@ public class RigatoniHardware
             motor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
             motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         }
-
+    }
+    public void initializeClawServos(HardwareMap hardwareMap)
+    {
+        // CLaw Servos
+        grabServo = hardwareMap.get(Servo.class, RigatoniIds.GRAB_SERVO);
+        rotServo = hardwareMap.get(Servo.class, RigatoniIds.ROT_SERVO);
+        
     }
 }
