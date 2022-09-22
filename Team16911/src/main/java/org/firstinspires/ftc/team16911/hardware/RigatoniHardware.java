@@ -23,7 +23,7 @@ public class RigatoniHardware
 
     // CLaw Servos
     public CRServo grabServo = null;
-    public CRServo rotServo = null;
+    public Servo rotServo = null;
 
 
     public void init(HardwareMap hardwareMap)
@@ -70,13 +70,12 @@ public class RigatoniHardware
     {
         // Claw Servos
         grabServo = hardwareMap.get(CRServo.class, RigatoniIds.GRAB_SERVO);
-        rotServo = hardwareMap.get(CRServo.class, RigatoniIds.ROT_SERVO);
+        rotServo = hardwareMap.get(Servo.class, RigatoniIds.ROT_SERVO);
 
-        CRServo[] servos = {grabServo, rotServo};
-        for(CRServo servo : servos)
-        {
-            servo.setDirection(CRServo.Direction.FORWARD);
-            servo.setPower(0);
-        }
+        grabServo.setDirection(CRServo.Direction.FORWARD);
+        grabServo.setPower(0);
+        rotServo.setDirection(Servo.Direction.FORWARD);
+        rotServo.setPosition(0);
+
     }
 }

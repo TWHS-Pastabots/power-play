@@ -91,10 +91,19 @@ public class RigatoniHorizontalClaw extends OpMode
     public void moveArm()
     {
         //triggers = linear pulley
-
+        hardware.liftArm.setPower((gamepad2.right_trigger - gamepad2.left_trigger)*.5);
     }
     public void rotateClaw()
     {
         hardware.grabServo.setPower(gamepad2.left_stick_x * .2);
+        double positionRotateServo = hardware.rotServo.getPosition();
+        if(gamepad2.right_bumper && positionRotateServo != 0) //could be 0, .5, or 1 depending on orientation
+        {
+            hardware.rotServo.setPosition(0);
+        }
+        if(gamepad2.left_bumper && positionRotateServo != .5) //could be 0, .5, 1 depending on orientation
+        {
+            hardware.rotServo.setPosition(.5);
+        }
     }
 }
