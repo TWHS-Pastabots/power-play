@@ -1,12 +1,14 @@
 package org.firstinspires.ftc.team16911.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.team16911.hardware.RigatoniHardware;
 
-
-public class Rigatoni extends OpMode {
+@TeleOp(name="RigatoniHorizontalClaw")
+public class RigatoniHorizontalClaw extends OpMode
+{
     RigatoniHardware hardware;
     final double FAST_SPEED = .8;
     final double SLOW_SPEED = .5;
@@ -92,6 +94,7 @@ public class Rigatoni extends OpMode {
     }
     public void rotateClaw()
     {
-
+        hardware.rotServo.setPosition(gamepad2.left_stick_y);
+        hardware.grabServo.setPosition(gamepad2.right_stick_y);
     }
 }
