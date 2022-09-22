@@ -1,4 +1,4 @@
-package main.java.org.firstinspires.ftc.teamcode.Hardware;
+package org.firstinspires.ftc.teamcode.Hardware;
 
 public class SpaghettiID {
     //drive motors
@@ -7,12 +7,12 @@ public class SpaghettiID {
     public static final String RIGHT_REAR_MOTOR = "rightRear";
     public static final String LEFT_REAR_MOTOR = "leftRear";
 
-    //public static final String LIFT_MOTOR = "liftMotor";
+    public static final String LIFT_MOTOR = "liftMotor";
 
     //CLAW SERVOS
-    //public static final String CLAW_SERVO = "clawServo";
-    //public static final String WHEEL_SERVOL = "wheelServoL";
-    //public static final String WHEEL_SERVOR = "wheelServoR";
+    public static final String CLAW_SERVO = "clawServo";
+    public static final String WHEEL_SERVOL = "wheelServoL";
+    public static final String WHEEL_SERVOR = "wheelServoR";
 
 
 
