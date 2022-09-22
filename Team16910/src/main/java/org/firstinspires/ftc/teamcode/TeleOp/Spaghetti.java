@@ -18,8 +18,8 @@ public class Spaghetti extends OpMode
     double slowConstant = FAST_SPEED;
     ElapsedTime armTime = null;
     ElapsedTime buttonTime = null;
-    //final double openClaw;
-    //final double closeClaw;
+    final double openClaw = 0;
+    final double closeClaw = 0.5;
 
     public void init()
     {
@@ -108,15 +108,29 @@ public class Spaghetti extends OpMode
     }
     public void moveLift()
     {
-
+        //GAMEPAD 2
     }
     public void clawGrasp()
     {
         //when claw opens and closes, reset rotating cone servos
+        //GAMEPAD 2
 
+        if (gamepad2.right_bumper)
+        {
+            if (hardware.clawServo.getPosition() == openClaw) {
+
+                hardware.clawServo.setPosition(closeClaw);
+            }
+            else
+            {
+                hardware.clawServo.setPosition(openClaw);
+            }
+        }
     }
     public void rotateCone()
     {
-
+        //triangle and x
+        //GAMEPAD 2
     }
+
 }
