@@ -1,11 +1,11 @@
-package main.java.org.firstinspires.ftc.teamcode.TeleOp;
+package org.firstinspires.ftc.teamcode.TeleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import main.java.org.firstinspires.ftc.teamcode.Hardware.SpaghettiHardware;
+import org.firstinspires.ftc.teamcode.Hardware.SpaghettiHardware;
 
 
 @TeleOp(name = "Spaghetti")
@@ -18,6 +18,8 @@ public class Spaghetti extends OpMode
     double slowConstant = FAST_SPEED;
     ElapsedTime armTime = null;
     ElapsedTime buttonTime = null;
+    //final double openClaw;
+    //final double closeClaw;
 
     public void init()
     {
@@ -38,7 +40,9 @@ public class Spaghetti extends OpMode
     public void loop()
     {
         drive();
-
+        moveLift();
+        clawGrasp();
+        rotateCone();
     }
 
     private void drive()
@@ -101,5 +105,18 @@ public class Spaghetti extends OpMode
         hardware.leftRear.setPower(leftRearPower * slowConstant);
         hardware.rightFront.setPower(rightFrontPower * slowConstant);
         hardware.rightRear.setPower(rightRearPower * slowConstant);
+    }
+    public void moveLift()
+    {
+
+    }
+    public void clawGrasp()
+    {
+        //when claw opens and closes, reset rotating cone servos
+
+    }
+    public void rotateCone()
+    {
+
     }
 }

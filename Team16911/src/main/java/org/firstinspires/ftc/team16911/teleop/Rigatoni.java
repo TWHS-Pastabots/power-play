@@ -89,9 +89,11 @@ public class Rigatoni extends OpMode {
     public void moveArm()
     {
 
+
     }
     public void rotateClaw()
     {
+
 
     }
 }
