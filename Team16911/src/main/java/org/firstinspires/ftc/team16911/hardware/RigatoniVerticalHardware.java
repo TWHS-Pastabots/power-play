@@ -10,7 +10,7 @@ import org.firstinspires.ftc.robotcore.internal.system.Assert;
 
 
 //HARDWARE FOR HORIZONTAL CLAW
-public class RigatoniHardware
+public class RigatoniVerticalHardware
 {
     // Primary Motors
     public DcMotorEx leftFront = null;
@@ -24,7 +24,7 @@ public class RigatoniHardware
     public DcMotorEx liftArm = null;
 
     // CLaw Servos
-    public CRServo grabServo = null;
+    public Servo grabServo = null;
     public Servo rotServo = null;
 
 
@@ -33,7 +33,7 @@ public class RigatoniHardware
         Assert.assertNotNull(hardwareMap);
         initializePrimaryMotors(hardwareMap);
         initializeClawServos(hardwareMap);
-        
+
 
     }
     public void initializePrimaryMotors(HardwareMap hardwareMap)
@@ -57,7 +57,7 @@ public class RigatoniHardware
         liftArm = hardwareMap.get(DcMotorEx.class, RigatoniIds.LIFT_ARM_MOTOR);
 
 
-        
+
 
 
         // Set Zero Power Behavior and Initialize Motors
@@ -71,11 +71,11 @@ public class RigatoniHardware
     public void initializeClawServos(HardwareMap hardwareMap)
     {
         // Claw Servos
-        grabServo = hardwareMap.get(CRServo.class, RigatoniIds.GRAB_SERVO);
+        grabServo = hardwareMap.get(Servo.class, RigatoniIds.GRAB_SERVO);
         rotServo = hardwareMap.get(Servo.class, RigatoniIds.ROT_SERVO);
 
-        grabServo.setDirection(CRServo.Direction.FORWARD);
-        grabServo.setPower(0);
+        grabServo.setDirection(Servo.Direction.FORWARD);
+        grabServo.setPosition(.5);
         rotServo.setDirection(Servo.Direction.FORWARD);
         rotServo.setPosition(0);
 
