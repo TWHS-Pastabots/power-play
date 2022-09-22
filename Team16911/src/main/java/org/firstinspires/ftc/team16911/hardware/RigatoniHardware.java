@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.team16911.hardware;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -21,8 +22,8 @@ public class RigatoniHardware
     public DcMotorEx liftArm = null;
 
     // CLaw Servos
-    public Servo grabServo = null;
-    public Servo rotServo = null;
+    public CRServo grabServo = null;
+    public CRServo rotServo = null;
 
 
     public void init(HardwareMap hardwareMap)
@@ -68,14 +69,14 @@ public class RigatoniHardware
     public void initializeClawServos(HardwareMap hardwareMap)
     {
         // Claw Servos
-        grabServo = hardwareMap.get(Servo.class, RigatoniIds.GRAB_SERVO);
-        rotServo = hardwareMap.get(Servo.class, RigatoniIds.ROT_SERVO);
+        grabServo = hardwareMap.get(CRServo.class, RigatoniIds.GRAB_SERVO);
+        rotServo = hardwareMap.get(CRServo.class, RigatoniIds.ROT_SERVO);
 
-        Servo[] servos = {grabServo, rotServo};
-        for(Servo servo : servos)
+        CRServo[] servos = {grabServo, rotServo};
+        for(CRServo servo : servos)
         {
-            servo.setDirection(Servo.Direction.FORWARD);
-            servo.setPosition(0);
+            servo.setDirection(CRServo.Direction.FORWARD);
+            servo.setPower(0);
         }
     }
 }
