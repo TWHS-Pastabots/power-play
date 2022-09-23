@@ -17,11 +17,11 @@ public class Spaghetti extends OpMode
     double slowConstant = FAST_SPEED;
     ElapsedTime armTime = null;
     ElapsedTime buttonTime = null;
-    final double openClaw = 0;
-    final double closeClaw = 0.5;
+    final double openClaw = 0.5;
+    final double closeClaw = 0;
 
     // Rotating wheels on claw
-    final double wheelForward = .25;
+    final double wheelForward = 0;
     final double wheelBackward = 1;
 
     public void init()
@@ -168,7 +168,7 @@ public class Spaghetti extends OpMode
         if (gamepad2.triangle)
         {
             // CHANGE WHEELBACK AND WHEELFORWARD VALUES
-            hardware.wheelServoL.setPosition(wheelForward);
+            hardware.wheelServoL.setPosition(wheelBackward);
             hardware.wheelServoR.setPosition(wheelForward);
 
             telemetry.addData("Wheel Position: ", "Forward");
@@ -178,7 +178,7 @@ public class Spaghetti extends OpMode
         if (gamepad2.cross)
         {
             // CHANGE WHEELBACK AND WHEELFORWARD VALUES
-            hardware.wheelServoL.setPosition(wheelBackward);
+            hardware.wheelServoL.setPosition(wheelForward);
             hardware.wheelServoR.setPosition(wheelBackward);
 
             telemetry.addData("Wheel Position: ", "Backward");
