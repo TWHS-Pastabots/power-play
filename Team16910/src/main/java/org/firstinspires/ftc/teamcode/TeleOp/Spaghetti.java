@@ -7,7 +7,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Hardware.SpaghettiHardware;
 
-
 @TeleOp(name = "Spaghetti")
 public class Spaghetti extends OpMode
 {
@@ -20,6 +19,10 @@ public class Spaghetti extends OpMode
     ElapsedTime buttonTime = null;
     final double openClaw = 0;
     final double closeClaw = 0.5;
+
+    // Rotating wheels on claw
+    final double wheelForward = .25;
+    final double wheelBackward = 1;
 
     public void init()
     {
@@ -56,7 +59,6 @@ public class Spaghetti extends OpMode
         double leftRearPower = y - x + rx;
         double rightFrontPower = y - x - rx;
         double rightRearPower = y + x - rx;
-
 
         if (Math.abs(leftFrontPower) > 1 || Math.abs(leftRearPower) > 1 ||
                 Math.abs(rightFrontPower) > 1 || Math.abs(rightRearPower) > 1 )
@@ -108,29 +110,67 @@ public class Spaghetti extends OpMode
     }
     public void moveLift()
     {
-        //GAMEPAD 2
+        // Up and down
+        // Operator
+        double verticalMove = gamepad2.left_stick_y;
+        hardware.liftMotor.setPower(verticalMove * slowConstant);
+
+        telemetry.addData("Motor Speed: ",verticalMove * slowConstant);
+        telemetry.update();
     }
     public void clawGrasp()
     {
-        //when claw opens and closes, reset rotating cone servos
-        //GAMEPAD 2
+        // When claw opens and closes, reset rotating cone servos
+        // Operator
 
         if (gamepad2.right_bumper)
         {
-            if (hardware.clawServo.getPosition() == openClaw) {
-
+            if (hardware.clawServo.getPosition() == openClaw)
+            {
                 hardware.clawServo.setPosition(closeClaw);
+
+               telemetry.addData("Servo position:", hardware.clawServo.getPosition());
+               telemetry.update();
             }
             else
             {
                 hardware.clawServo.setPosition(openClaw);
+
+                // RESET ROTATING SERVOS
+                // SOME SLEEP OR TIMER METHOD TO WAIT BEFORE RESETTING SERVOS
+                hardware.wheelServoL.setPosition(0);
+                hardware.wheelServoR.setPosition(0);
+
+                telemetry.addData("Servo position:", hardware.clawServo.getPosition());
+                telemetry.update();
             }
         }
     }
     public void rotateCone()
     {
-        //triangle and x
-        //GAMEPAD 2
+        // Rotate cone 90 degrees forwards or backwards
+        // Operator
+        if (gamepad2.triangle)
+        {
+            // CHANGE WHEELBACK AND WHEELFORWARD VALUES
+            hardware.wheelServoL.setPosition(wheelForward);
+            hardware.wheelServoR.setPosition(wheelForward);
+
+            telemetry.addData("Wheel Position: ", "Forward");
+            telemetry.update();
+
+        }
+        if (gamepad2.cross)
+        {
+            // CHANGE WHEELBACK AND WHEELFORWARD VALUES
+            hardware.wheelServoL.setPosition(wheelBackward);
+            hardware.wheelServoR.setPosition(wheelBackward);
+
+            telemetry.addData("Wheel Position: ", "Backward");
+            telemetry.update();
+
+        }
+
     }
 
 }

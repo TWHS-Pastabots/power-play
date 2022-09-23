@@ -26,6 +26,7 @@ public class SpaghettiHardware
     {
         Assert.assertNotNull(hardwareMap);
         initializeMotors(hardwareMap);
+        initializeClawServos(hardwareMap);
     }
 
     public void initializeMotors(HardwareMap hardwareMap)
