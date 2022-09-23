@@ -103,6 +103,7 @@ public class Spaghetti extends OpMode
             buttonTime.reset();
         }
 
+
         hardware.leftFront.setPower(leftFrontPower * slowConstant);
         hardware.leftRear.setPower(leftRearPower * slowConstant);
         hardware.rightFront.setPower(rightFrontPower * slowConstant);
