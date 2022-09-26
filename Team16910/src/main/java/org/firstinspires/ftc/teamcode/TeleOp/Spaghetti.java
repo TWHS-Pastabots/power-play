@@ -134,7 +134,7 @@ public class Spaghetti extends OpMode
                telemetry.addData("Servo position:", hardware.clawServo.getPosition());
                telemetry.update();
             }
-            else
+            else //if claw is closed
             {
                 hardware.clawServo.setPosition(openClaw);
 
