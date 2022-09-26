@@ -51,6 +51,7 @@ public class Spaghetti extends OpMode
     private void drive()
     {
         // Mecanum drivecode
+        // Driver
         double y = -gamepad1.left_stick_y; // Remember, this is reversed!
         double x = gamepad1.left_stick_x; // Counteract imperfect strafing
         double rx = gamepad1.right_stick_x;
@@ -140,22 +141,12 @@ public class Spaghetti extends OpMode
                 // RESET ROTATING SERVOS
                 // SOME SLEEP OR TIMER METHOD TO WAIT BEFORE RESETTING SERVOS
 
-               /* while(hardware.clawServo.getPosition()<.5)
+               while(hardware.clawServo.getPosition()<.5)
                 {
                     // do nothing until claw is open
                 }
                 hardware.wheelServoL.setPosition(0.5);
                 hardware.wheelServoR.setPosition(0.5);
-
-                */
-
-                /*
-                 if (hardware.clawServo.getPosition()>.8)
-                 {
-                     hardware.wheelServoL.setPosition(0.5);
-                     hardware.wheelServoR.setPosition(0.5);
-                 }
-                 */
 
                 telemetry.addData("Servo position:", hardware.clawServo.getPosition());
                 telemetry.update();
@@ -169,7 +160,7 @@ public class Spaghetti extends OpMode
         if (gamepad2.triangle)
         {
             // CHANGE WHEELBACK AND WHEELFORWARD VALUES
-            hardware.wheelServoL.setPosition(wheelBackward);
+            hardware.wheelServoL.setPosition(wheelForward);
             hardware.wheelServoR.setPosition(wheelForward);
 
             telemetry.addData("Wheel Position: ", "Forward");
@@ -179,7 +170,7 @@ public class Spaghetti extends OpMode
         if (gamepad2.cross)
         {
             // CHANGE WHEELBACK AND WHEELFORWARD VALUES
-            hardware.wheelServoL.setPosition(wheelForward);
+            hardware.wheelServoL.setPosition(wheelBackward);
             hardware.wheelServoR.setPosition(wheelBackward);
 
             telemetry.addData("Wheel Position: ", "Backward");
