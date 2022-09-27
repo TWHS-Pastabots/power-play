@@ -3,9 +3,12 @@ package org.firstinspires.ftc.team16910.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-@Autonomous(name= "BlueAway")
-public class BlueAway extends LinearOpMode {
+import org.firstinspires.ftc.team16910.drive.SampleMecanumDrive;
 
+@Autonomous(name= "BlueAway")
+public class BlueAway extends LinearOpMode
+{
+    private SampleMecanumDrive drive;
     public void runOpMode()
     {
 
