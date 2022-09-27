@@ -1,5 +1,17 @@
 package org.firstinspires.ftc.team16910.drive;
 
+import static org.firstinspires.ftc.team16910.drive.DriveConstants.MAX_ACCEL;
+import static org.firstinspires.ftc.team16910.drive.DriveConstants.MAX_ANG_ACCEL;
+import static org.firstinspires.ftc.team16910.drive.DriveConstants.MAX_ANG_VEL;
+import static org.firstinspires.ftc.team16910.drive.DriveConstants.MAX_VEL;
+import static org.firstinspires.ftc.team16910.drive.DriveConstants.MOTOR_VELO_PID;
+import static org.firstinspires.ftc.team16910.drive.DriveConstants.RUN_USING_ENCODER;
+import static org.firstinspires.ftc.team16910.drive.DriveConstants.TRACK_WIDTH;
+import static org.firstinspires.ftc.team16910.drive.DriveConstants.encoderTicksToInches;
+import static org.firstinspires.ftc.team16910.drive.DriveConstants.kA;
+import static org.firstinspires.ftc.team16910.drive.DriveConstants.kStatic;
+import static org.firstinspires.ftc.team16910.drive.DriveConstants.kV;
+
 import androidx.annotation.NonNull;
 
 import com.acmerobotics.dashboard.config.Config;
@@ -33,18 +45,6 @@ import org.firstinspires.ftc.team16910.util.LynxModuleUtil;
 
 import java.util.Arrays;
 import java.util.List;
-
-import static org.firstinspires.ftc.team16910.drive.DriveConstants.MAX_ACCEL;
-import static org.firstinspires.ftc.team16910.drive.DriveConstants.MAX_ANG_ACCEL;
-import static org.firstinspires.ftc.team16910.drive.DriveConstants.MAX_ANG_VEL;
-import static org.firstinspires.ftc.team16910.drive.DriveConstants.MAX_VEL;
-import static org.firstinspires.ftc.team16910.drive.DriveConstants.MOTOR_VELO_PID;
-import static org.firstinspires.ftc.team16910.drive.DriveConstants.RUN_USING_ENCODER;
-import static org.firstinspires.ftc.team16910.drive.DriveConstants.TRACK_WIDTH;
-import static org.firstinspires.ftc.team16910.drive.DriveConstants.encoderTicksToInches;
-import static org.firstinspires.ftc.team16910.drive.DriveConstants.kA;
-import static org.firstinspires.ftc.team16910.drive.DriveConstants.kStatic;
-import static org.firstinspires.ftc.team16910.drive.DriveConstants.kV;
 
 /*
  * Simple tank drive hardware implementation for REV hardware.
