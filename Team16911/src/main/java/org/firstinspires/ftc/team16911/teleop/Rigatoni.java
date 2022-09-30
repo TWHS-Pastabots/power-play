@@ -85,15 +85,15 @@ public class Rigatoni extends OpMode {
         hardware.leftRear.setPower(leftRearPower * slowConstant);
         hardware.rightFront.setPower(rightFrontPower * slowConstant);
         hardware.rightRear.setPower(rightRearPower * slowConstant);
+
+
     }
     public void moveArm()
     {
-
-
+        hardware.liftArm.setPower((gamepad2.right_trigger - gamepad2.left_trigger)*.5);
     }
     public void rotateClaw()
     {
-
-
+        hardware.
     }
 }

@@ -24,7 +24,7 @@ public class Utilities
         switch(pos)
         {
             case "floor":
-                hardwareMap.liftArm.
+                //hardwareMap.liftArm.
                 break;
             case "low":
                 break;

@@ -96,18 +96,22 @@ public class RigatoniVerticalClaw extends OpMode
     }
     public void rotateClaw()
     {
-        double grabServoPosition = hardware.grabServo.getPosition(); //CIRCLE = 0 DEG; CROSS = 90 DEG; SQUARE = 180
-        if(gamepad2.cross && grabServoPosition != .5)
+        //[0.0, 1.0] for range; 0 = 0 deg; 1.0 = 270 deg
+        double rotServoPosition = hardware.rotServo.getPosition(); //CIRCLE = 0 DEG; CROSS = 90 DEG; SQUARE = 180
+        if(gamepad2.cross && Math.abs(rotServoPosition - 0.3333) > 0.018) //10 degree range of error
         {
-            hardware.grabServo.setPosition(.5);
+            hardware.rotServo.setPosition(0.3333);
         }
-        if(gamepad2.circle && grabServoPosition != 0)
+        if(gamepad2.circle && Math.abs(rotServoPosition - 0) > 0.018)
         {
-            hardware.grabServo.setPosition(0);
+            hardware.rotServo.setPosition(0);
         }
-        if(gamepad2.square && grabServoPosition != 1)
+        if(gamepad2.square && Math.abs(rotServoPosition - 0.6666) > 0.018)
         {
-            //hardware.
+            hardware.rotServo.setPosition(0.6666);
         }
+        int rightBumper = gamepad2.right_bumper ? 1 : 0;
+        int leftBumper = gamepad2.left_bumper ? 1 : 0;
+        hardware.grabServo.setPower((rightBumper - leftBumper) * slowConstant);
     }
 }

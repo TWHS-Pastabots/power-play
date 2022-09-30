@@ -21,7 +21,7 @@ public class BlueHome extends LinearOpMode {
         hardware.init(hardwareMap);
 
         drive = new SampleMecanumDrive(hardwareMap);
-        drive.setPoseEstimate(new);
+        drive.setPoseEstimate(blueHome);
         buildTrajectories();
 
 
