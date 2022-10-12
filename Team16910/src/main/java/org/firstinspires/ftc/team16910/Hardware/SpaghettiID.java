@@ -8,6 +8,7 @@ public class SpaghettiID {
     public static final String LEFT_REAR_MOTOR = "leftRear";
 
     public static final String LIFT_MOTOR = "liftMotor";
+    public static final String LIFT_MOTOR2 = "liftMotor2";
 
     //CLAW SERVOS
     public static final String CLAW_SERVO = "clawServo";

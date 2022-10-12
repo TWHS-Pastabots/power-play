@@ -1,9 +1,6 @@
 <component name="libraryTable">
   <library name="Gradle: org.firstinspires.ftc:Inspection:8.0.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/5a1c92ea419aacce79ab61b0b781c668/transformed/jetified-Inspection-8.0.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5a1c92ea419aacce79ab61b0b781c668/transformed/jetified-Inspection-8.0.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5a1c92ea419aacce79ab61b0b781c668/transformed/jetified-Inspection-8.0.0/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6b70b0c689773c75db6a098a39d35ac9/transformed/jetified-Inspection-8.0.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6b70b0c689773c75db6a098a39d35ac9/transformed/jetified-Inspection-8.0.0/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/6b70b0c689773c75db6a098a39d35ac9/transformed/jetified-Inspection-8.0.0/jars/classes.jar!/" />
