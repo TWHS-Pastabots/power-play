@@ -24,7 +24,6 @@ public class BlueAudience extends LinearOpMode
 
     public void runOpMode()
     {
-        awdalwdiua
         // Initialize Hardware
         SpaghettiHardware hardware = new SpaghettiHardware();
         hardware.init(hardwareMap);
