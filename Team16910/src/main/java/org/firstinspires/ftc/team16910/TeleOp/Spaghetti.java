@@ -161,7 +161,7 @@ public class Spaghetti extends OpMode
         {
             // CHANGE WHEELBACK AND WHEELFORWARD VALUES
             hardware.wheelServoL.setPosition(wheelForward);
-            hardware.wheelServoR.setPosition(wheelForward);
+            hardware.wheelServoR.setPosition(wheelBackward);
 
             telemetry.addData("Wheel Position: ", "Forward");
             telemetry.update();
@@ -171,7 +171,7 @@ public class Spaghetti extends OpMode
         {
             // CHANGE WHEELBACK AND WHEELFORWARD VALUES
             hardware.wheelServoL.setPosition(wheelBackward);
-            hardware.wheelServoR.setPosition(wheelBackward);
+            hardware.wheelServoR.setPosition(wheelForward);
 
             telemetry.addData("Wheel Position: ", "Backward");
             telemetry.update();
