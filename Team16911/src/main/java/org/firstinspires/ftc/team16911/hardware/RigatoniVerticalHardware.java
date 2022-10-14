@@ -75,7 +75,8 @@ public class RigatoniVerticalHardware
         rotServo = hardwareMap.get(Servo.class, RigatoniIds.ROT_SERVO);
 
         grabServo.setDirection(CRServo.Direction.FORWARD);
-        grabServo.setPosition(.5);
+        //grabServo.setPosition(.5);
+        grabServo.setPower(0);
         rotServo.setDirection(Servo.Direction.FORWARD);
         rotServo.setPosition(0);
 

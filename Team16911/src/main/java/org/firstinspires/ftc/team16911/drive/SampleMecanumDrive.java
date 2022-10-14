@@ -26,6 +26,7 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
 
+import org.firstinspires.ftc.team16911.util.LynxModuleUtil;
 import org.firstinspires.ftc.team16911.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.team16911.trajectorysequence.TrajectorySequenceBuilder;
 import org.firstinspires.ftc.team16911.trajectorysequence.TrajectorySequenceRunner;
