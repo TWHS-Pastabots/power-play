@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.team16910.Hardware;
 
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -14,6 +15,7 @@ public class SpaghettiHardware
     public DcMotorEx leftRear;
     public DcMotorEx rightRear;
     public DcMotorEx liftMotor;
+    public DcMotorEx liftMotor2;
     public Servo clawServo;
     public Servo wheelServoL;
     public Servo wheelServoR;
@@ -24,11 +26,12 @@ public class SpaghettiHardware
     public void init(HardwareMap hardwareMap)
     {
         Assert.assertNotNull(hardwareMap);
-        initializeMotors(hardwareMap);
+        initializeDriveMotors(hardwareMap);
         initializeClawServos(hardwareMap);
+        initializeLiftMotors(hardwareMap);
     }
 
-    public void initializeMotors(HardwareMap hardwareMap)
+    public void initializeDriveMotors(HardwareMap hardwareMap)
     {
         //drive motors
         leftFront = hardwareMap.get(DcMotorEx.class, SpaghettiID.LEFT_FRONT_MOTOR);
@@ -36,14 +39,12 @@ public class SpaghettiHardware
         leftRear = hardwareMap.get(DcMotorEx.class, SpaghettiID.LEFT_REAR_MOTOR);
         rightRear = hardwareMap.get(DcMotorEx.class, SpaghettiID.RIGHT_REAR_MOTOR);
 
-        motors = new DcMotorEx[]{leftFront, leftRear, rightFront, rightRear,liftMotor};
+        motors = new DcMotorEx[]{leftFront, leftRear, rightFront, rightRear};
 
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFront.setDirection(DcMotorSimple.Direction.FORWARD);
         rightRear.setDirection(DcMotorSimple.Direction.FORWARD);
-
-        liftMotor = hardwareMap.get(DcMotorEx.class, SpaghettiID.LIFT_MOTOR);
 
 
         for (DcMotorEx motor : motors) {
@@ -51,6 +52,24 @@ public class SpaghettiHardware
             motor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
             motor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         }
+    }
+    public void initializeLiftMotors(HardwareMap hardwareMap)
+    {
+        liftMotor = hardwareMap.get(DcMotorEx.class, SpaghettiID.LIFT_MOTOR);
+        liftMotor2 = hardwareMap.get(DcMotorEx.class, SpaghettiID.LIFT_MOTOR2);
+
+        liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        liftMotor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        liftMotor.setDirection(DcMotorEx.Direction.FORWARD);
+        liftMotor2.setDirection(DcMotorEx.Direction.FORWARD);
+
+        liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        liftMotor2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        liftMotor.setTargetPosition(0);
+        liftMotor2.setTargetPosition(0);
+
     }
     public void initializeClawServos(HardwareMap hardwareMap)
     {
