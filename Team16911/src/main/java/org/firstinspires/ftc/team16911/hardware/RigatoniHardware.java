@@ -24,20 +24,18 @@ public class RigatoniHardware
     public DcMotorEx liftArm = null;
 
     // CLaw Servos
-    public CRServo grabServo = null;
-    public Servo rotServo = null;
+//    public CRServo grabServo = null;
+//    public Servo rotServo = null;
 
 
-    public void init(HardwareMap hardwareMap)
-    {
+    public void init(HardwareMap hardwareMap) throws Exception {
         Assert.assertNotNull(hardwareMap);
         initializePrimaryMotors(hardwareMap);
         initializeClawServos(hardwareMap);
         
 
     }
-    public void initializePrimaryMotors(HardwareMap hardwareMap)
-    {
+    public void initializePrimaryMotors(HardwareMap hardwareMap) throws Exception {
         motors = new DcMotorEx[]{leftFront, leftRear, rightFront, rightRear, liftArm};
 
 
@@ -56,28 +54,32 @@ public class RigatoniHardware
         // Supplementary Motors
         liftArm = hardwareMap.get(DcMotorEx.class, RigatoniIds.LIFT_ARM_MOTOR);
 
+        liftArm.setDirection(DcMotorSimple.Direction.FORWARD);
 
-        
+
 
 
         // Set Zero Power Behavior and Initialize Motors
         for (DcMotorEx motor : motors)
         {
-            motor.setPower(0);
-            motor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-            motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+                motor.setPower(0);
+                motor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+                motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+
         }
     }
     public void initializeClawServos(HardwareMap hardwareMap)
     {
         // Claw Servos
-        grabServo = hardwareMap.get(CRServo.class, RigatoniIds.GRAB_SERVO);
-        rotServo = hardwareMap.get(Servo.class, RigatoniIds.ROT_SERVO);
-
-        grabServo.setDirection(CRServo.Direction.FORWARD);
-        grabServo.setPower(0);
-        rotServo.setDirection(Servo.Direction.FORWARD);
-        rotServo.setPosition(0);
+//        grabServo = hardwareMap.get(CRServo.class, RigatoniIds.GRAB_SERVO);
+//        rotServo = hardwareMap.get(Servo.class, RigatoniIds.ROT_SERVO);
+//
+//        grabServo.setDirection(CRServo.Direction.FORWARD);
+//        grabServo.setPower(0);
+//        rotServo.setDirection(Servo.Direction.FORWARD);
+//        rotServo.setPosition(0);
 
     }
 }

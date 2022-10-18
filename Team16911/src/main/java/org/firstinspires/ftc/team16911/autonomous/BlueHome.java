@@ -18,7 +18,11 @@ public class BlueHome extends LinearOpMode {
     public void runOpMode() throws InterruptedException
     {
         RigatoniHardware hardware = new RigatoniHardware(); //Horizontal Claw
-        hardware.init(hardwareMap);
+        try {
+            hardware.init(hardwareMap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         drive = new SampleMecanumDrive(hardwareMap);
         drive.setPoseEstimate(blueHome);

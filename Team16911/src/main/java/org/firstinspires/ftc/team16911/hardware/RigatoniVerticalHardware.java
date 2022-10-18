@@ -32,7 +32,7 @@ public class RigatoniVerticalHardware
     {
         Assert.assertNotNull(hardwareMap);
         initializePrimaryMotors(hardwareMap);
-        initializeClawServos(hardwareMap);
+       // initializeClawServos(hardwareMap);
 
 
     }
@@ -68,17 +68,17 @@ public class RigatoniVerticalHardware
             motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         }
     }
-    public void initializeClawServos(HardwareMap hardwareMap)
-    {
-        // Claw Servos
-        grabServo = hardwareMap.get(CRServo.class, RigatoniIds.GRAB_SERVO);
-        rotServo = hardwareMap.get(Servo.class, RigatoniIds.ROT_SERVO);
+//    public void initializeClawServos(HardwareMap hardwareMap)
+//    {
+//        // Claw Servos
+//        grabServo = hardwareMap.get(CRServo.class, RigatoniIds.GRAB_SERVO);
+//        rotServo = hardwareMap.get(Servo.class, RigatoniIds.ROT_SERVO);
+//
+//        grabServo.setDirection(CRServo.Direction.FORWARD);
+//        //grabServo.setPosition(.5);
+//        grabServo.setPower(0);
+//        rotServo.setDirection(Servo.Direction.FORWARD);
+//        rotServo.setPosition(0);
 
-        grabServo.setDirection(CRServo.Direction.FORWARD);
-        //grabServo.setPosition(.5);
-        grabServo.setPower(0);
-        rotServo.setDirection(Servo.Direction.FORWARD);
-        rotServo.setPosition(0);
-
-    }
+    //}
 }

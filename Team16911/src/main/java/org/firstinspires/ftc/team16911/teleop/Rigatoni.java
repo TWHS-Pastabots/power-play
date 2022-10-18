@@ -1,11 +1,12 @@
 package org.firstinspires.ftc.team16911.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.team16911.hardware.RigatoniHardware;
 
-
+@TeleOp(name="Rigatoni")
 public class Rigatoni extends OpMode {
     RigatoniHardware hardware;
     final double FAST_SPEED = .8;
@@ -16,7 +17,11 @@ public class Rigatoni extends OpMode {
     @Override
     public void init() {
         hardware = new RigatoniHardware();
-        hardware.init(hardwareMap);
+        try {
+            hardware.init(hardwareMap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         buttonTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
     }
 
@@ -24,7 +29,7 @@ public class Rigatoni extends OpMode {
     public void loop() {
         drive();
         moveArm();
-        rotateClaw();
+        //rotateClaw();
     }
     public void drive() {
         // Mecanum drivecode
@@ -90,10 +95,10 @@ public class Rigatoni extends OpMode {
     }
     public void moveArm()
     {
-        hardware.liftArm.setPower((gamepad2.right_trigger - gamepad2.left_trigger)*.5);
+        hardware.liftArm.setPower((gamepad2.right_trigger - gamepad2.left_trigger)*.2);
     }
-    public void rotateClaw()
-    {
-
-    }
+//    public void rotateClaw()
+//    {
+//
+//    }
 }
