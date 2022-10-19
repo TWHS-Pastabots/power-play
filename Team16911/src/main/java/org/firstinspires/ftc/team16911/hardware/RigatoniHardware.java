@@ -32,11 +32,11 @@ public class RigatoniHardware
         Assert.assertNotNull(hardwareMap);
         initializePrimaryMotors(hardwareMap);
         initializeClawServos(hardwareMap);
-        
+        initializeSupplementaryMotors(hardwareMap);
 
     }
     public void initializePrimaryMotors(HardwareMap hardwareMap) throws Exception {
-        motors = new DcMotorEx[]{leftFront, leftRear, rightFront, rightRear, liftArm};
+        motors = new DcMotorEx[]{leftFront, leftRear, rightFront, rightRear};
 
 
         // Primary Motors
@@ -49,14 +49,6 @@ public class RigatoniHardware
         leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFront.setDirection(DcMotorSimple.Direction.FORWARD);
         rightRear.setDirection(DcMotorSimple.Direction.FORWARD);
-
-
-        // Supplementary Motors
-        liftArm = hardwareMap.get(DcMotorEx.class, RigatoniIds.LIFT_ARM_MOTOR);
-
-        liftArm.setDirection(DcMotorSimple.Direction.FORWARD);
-
-
 
 
         // Set Zero Power Behavior and Initialize Motors
@@ -81,5 +73,15 @@ public class RigatoniHardware
 //        rotServo.setDirection(Servo.Direction.FORWARD);
 //        rotServo.setPosition(0);
 
+    }
+    public void initializeSupplementaryMotors(HardwareMap hardwareMap)
+    {
+        liftArm = hardwareMap.get(DcMotorEx.class, RigatoniIds.LIFT_ARM_MOTOR);
+
+        liftArm.setDirection(DcMotorSimple.Direction.FORWARD);
+
+        liftArm.setPower(0);
+        liftArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        liftArm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 }

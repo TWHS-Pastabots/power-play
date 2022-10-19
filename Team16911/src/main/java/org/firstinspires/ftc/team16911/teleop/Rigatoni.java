@@ -95,7 +95,7 @@ public class Rigatoni extends OpMode {
     }
     public void moveArm()
     {
-        hardware.liftArm.setPower((gamepad2.right_trigger - gamepad2.left_trigger)*.2);
+        hardware.liftArm.setPower((gamepad2.right_trigger - gamepad2.left_trigger)*.5);
     }
 //    public void rotateClaw()
 //    {
