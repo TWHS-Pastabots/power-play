@@ -28,14 +28,14 @@ public class RigatoniHardware
 //    public Servo rotServo = null;
 
 
-    public void init(HardwareMap hardwareMap) throws Exception {
+    public void init(HardwareMap hardwareMap) {
         Assert.assertNotNull(hardwareMap);
         initializePrimaryMotors(hardwareMap);
         initializeClawServos(hardwareMap);
         initializeSupplementaryMotors(hardwareMap);
 
     }
-    public void initializePrimaryMotors(HardwareMap hardwareMap) throws Exception {
+    public void initializePrimaryMotors(HardwareMap hardwareMap) {
         motors = new DcMotorEx[]{leftFront, leftRear, rightFront, rightRear};
 
 

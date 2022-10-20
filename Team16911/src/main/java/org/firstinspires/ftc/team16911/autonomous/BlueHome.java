@@ -15,14 +15,10 @@ public class BlueHome extends LinearOpMode {
     private final Pose2d blueHome = new Pose2d(-36, 60, 270);
 
     @Override
-    public void runOpMode() throws InterruptedException
+    public void runOpMode()
     {
         RigatoniHardware hardware = new RigatoniHardware(); //Horizontal Claw
-        try {
-            hardware.init(hardwareMap);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        hardware.init(hardwareMap);
 
         drive = new SampleMecanumDrive(hardwareMap);
         drive.setPoseEstimate(blueHome);

@@ -17,11 +17,7 @@ public class Rigatoni extends OpMode {
     @Override
     public void init() {
         hardware = new RigatoniHardware();
-        try {
-            hardware.init(hardwareMap);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        hardware.init(hardwareMap);
         buttonTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
     }
 
