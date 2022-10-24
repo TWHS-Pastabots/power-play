@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.team16911.autonomous;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.team16911.hardware.RigatoniHardware;
@@ -13,7 +14,7 @@ public class Utilities
     {
         this.hardware = hardware;
     }
-    public void openClaw()
+    public void openClaw(int height)
     {
 
     }

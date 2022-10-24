@@ -24,8 +24,8 @@ public class RigatoniHardware
     public DcMotorEx liftArm = null;
 
     // CLaw Servos
-//    public CRServo grabServo = null;
-//    public Servo rotServo = null;
+    public CRServo grabServo = null;
+    public Servo rotServo = null;
 
 
     public void init(HardwareMap hardwareMap) {
@@ -65,13 +65,13 @@ public class RigatoniHardware
     public void initializeClawServos(HardwareMap hardwareMap)
     {
         // Claw Servos
-//        grabServo = hardwareMap.get(CRServo.class, RigatoniIds.GRAB_SERVO);
-//        rotServo = hardwareMap.get(Servo.class, RigatoniIds.ROT_SERVO);
-//
-//        grabServo.setDirection(CRServo.Direction.FORWARD);
-//        grabServo.setPower(0);
-//        rotServo.setDirection(Servo.Direction.FORWARD);
-//        rotServo.setPosition(0);
+        grabServo = hardwareMap.get(CRServo.class, RigatoniIds.GRAB_SERVO);
+        rotServo = hardwareMap.get(Servo.class, RigatoniIds.ROT_SERVO);
+
+        grabServo.setDirection(CRServo.Direction.FORWARD);
+        grabServo.setPower(0);
+        rotServo.setDirection(Servo.Direction.FORWARD);
+        rotServo.setPosition(0);
 
     }
     public void initializeSupplementaryMotors(HardwareMap hardwareMap)
