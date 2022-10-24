@@ -4,3 +4,4 @@ include ':Team16909'
 include ':Team16910'
 include ':Team16911'
 
+include ':MeepMeepTesting'
