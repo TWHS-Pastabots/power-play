@@ -20,9 +20,12 @@ public class BlueHome extends LinearOpMode {
         RigatoniHardware hardware = new RigatoniHardware(); //Horizontal Claw
         hardware.init(hardwareMap);
 
+        utilities = new Utilities(hardware);
         drive = new SampleMecanumDrive(hardwareMap);
         drive.setPoseEstimate(blueHome);
         buildTrajectories();
+
+
 
 
     }
