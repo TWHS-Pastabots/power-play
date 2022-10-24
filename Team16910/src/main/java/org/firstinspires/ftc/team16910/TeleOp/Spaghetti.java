@@ -2,9 +2,12 @@ package org.firstinspires.ftc.team16910.TeleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.team16910.Hardware.SpaghettiHardware;
+
 
 @TeleOp(name = "Spaghetti")
 public class Spaghetti extends OpMode
@@ -18,10 +21,11 @@ public class Spaghetti extends OpMode
     ElapsedTime buttonTime = null;
     final double openClaw = 0.5;
     final double closeClaw = 0;
-
     // Rotating wheels on claw
     final double wheelForward = 0;
     final double wheelBackward = 1;
+
+    int liftPosition = 0;
 
     public void init()
     {
@@ -103,7 +107,6 @@ public class Spaghetti extends OpMode
             buttonTime.reset();
         }
 
-
         hardware.leftFront.setPower(leftFrontPower * slowConstant);
         hardware.leftRear.setPower(leftRearPower * slowConstant);
         hardware.rightFront.setPower(rightFrontPower * slowConstant);
@@ -111,14 +114,38 @@ public class Spaghetti extends OpMode
     }
     private void moveLift()
     {
-        // Up and down
-        // Operator
-        double verticalMove = gamepad2.left_stick_y;
-        hardware.liftMotor.setPower(verticalMove * slowConstant);
-        hardware.liftMotor2.setPower(verticalMove * slowConstant);
 
-        telemetry.addData("Motor Speed: ",verticalMove * slowConstant);
-        telemetry.update();
+        // 3 different set positions
+        // Operator
+        if (gamepad2.dpad_up)
+        {
+            hardware.liftMotor.setTargetPosition(liftPosition + 100);
+            hardware.liftMotor2.setTargetPosition(liftPosition + 100);
+
+            hardware.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            hardware.liftMotor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            hardware.liftMotor.setPower(1);
+            hardware.liftMotor2.setPower(1);
+
+        }
+        if (gamepad1.dpad_down)
+        {
+            // 100 value should be changed
+            hardware.liftMotor.setTargetPosition(liftPosition - 100);
+            hardware.liftMotor2.setTargetPosition(liftPosition - 100);
+
+            hardware.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            hardware.liftMotor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            hardware.liftMotor.setPower(1);
+            hardware.liftMotor2.setPower(1);
+
+        }
+        
+        liftPosition = hardware.liftMotor.getCurrentPosition();
+
+
     }
     private void clawGrasp()
     {
