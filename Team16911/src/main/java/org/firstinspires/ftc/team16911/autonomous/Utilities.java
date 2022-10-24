@@ -14,9 +14,9 @@ public class Utilities
     {
         this.hardware = hardware;
     }
-    public void openClaw(int height)
+    public void openClaw()
     {
-
+        hardware.grabServo.;
     }
     public void rotateClaw()
     {
