@@ -142,7 +142,7 @@ public class Spaghetti extends OpMode
             hardware.liftMotor2.setPower(1);
 
         }
-        
+
         liftPosition = hardware.liftMotor.getCurrentPosition();
 
 
