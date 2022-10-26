@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/power-play.iml" filepath="$PROJECT_DIR$/.idea/modules/power-play.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/FtcRobotController/power-play.FtcRobotController.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/FtcRobotController/power-play.FtcRobotController.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Team16909/power-play.Team16909.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/Team16909/power-play.Team16909.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Team16910/power-play.Team16910.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/Team16910/power-play.Team16910.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Team16911/power-play.Team16911.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Team16911/power-play.Team16911.main.iml" />
+    </modules>
+  </component>
+</project>

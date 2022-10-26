@@ -32,7 +32,7 @@ public class RigatoniVerticalHardware
     {
         Assert.assertNotNull(hardwareMap);
         initializePrimaryMotors(hardwareMap);
-       // initializeClawServos(hardwareMap);
+        initializeClawServos(hardwareMap);
 
 
     }
