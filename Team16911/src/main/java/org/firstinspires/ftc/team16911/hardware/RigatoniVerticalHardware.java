@@ -38,7 +38,7 @@ public class RigatoniVerticalHardware
     }
     public void initializePrimaryMotors(HardwareMap hardwareMap)
     {
-        motors = new DcMotorEx[]{leftFront, leftRear, rightFront, rightRear, liftArm};
+        motors = new DcMotorEx[]{leftFront, leftRear, rightFront, rightRear};
 
 
         // Primary Motors
