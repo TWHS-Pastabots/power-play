@@ -55,12 +55,28 @@ public class RigatoniHardware
         for (DcMotorEx motor : motors)
         {
 
-                motor.setPower(0);
-                motor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-                motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            motor.setPower(0);
+            motor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+            motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
         }
+        leftRear.setPower(0);
+        leftRear.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        leftRear.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        leftFront.setPower(0);
+        leftFront.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        leftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        rightFront.setPower(0);
+        rightFront.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        rightRear.setPower(0);
+        rightRear.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        rightRear.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
     }
     public void initializeClawServos(HardwareMap hardwareMap)
     {
