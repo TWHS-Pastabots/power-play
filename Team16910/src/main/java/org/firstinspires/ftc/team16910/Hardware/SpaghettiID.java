@@ -11,9 +11,9 @@ public class SpaghettiID {
     public static final String LIFT_MOTOR2 = "liftMotor2";
 
     //CLAW SERVOS
-    public static final String CLAW_SERVO = "clawServo";
-    public static final String WHEEL_SERVOL = "wheelServoL";
-    public static final String WHEEL_SERVOR = "wheelServoR";
+    //public static final String CLAW_SERVO = "clawServo";
+    //public static final String WHEEL_SERVOL = "wheelServoL";
+    //public static final String WHEEL_SERVOR = "wheelServoR";
 
 
 

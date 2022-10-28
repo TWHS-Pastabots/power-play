@@ -27,7 +27,7 @@ public class SpaghettiHardware
     {
         Assert.assertNotNull(hardwareMap);
         initializeDriveMotors(hardwareMap);
-        initializeClawServos(hardwareMap);
+      //  initializeClawServos(hardwareMap);
         initializeLiftMotors(hardwareMap);
     }
 
@@ -61,17 +61,26 @@ public class SpaghettiHardware
         liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         liftMotor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        liftMotor.setDirection(DcMotorEx.Direction.FORWARD);
+        // motors move in opposite direction
+        liftMotor.setDirection(DcMotorEx.Direction.REVERSE);
         liftMotor2.setDirection(DcMotorEx.Direction.FORWARD);
 
-        liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        liftMotor2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        liftMotor.setTargetPosition(0);
-        liftMotor2.setTargetPosition(0);
+        liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        liftMotor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        liftMotor.setPower(0);
+        liftMotor2.setPower(0);
+
+
+        //  liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        // liftMotor2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+      //  liftMotor.setTargetPosition(0);
+       // liftMotor2.setTargetPosition(0);
 
     }
-    public void initializeClawServos(HardwareMap hardwareMap)
+   /* public void initializeClawServos(HardwareMap hardwareMap)
     {
         servos = new Servo[]{clawServo,wheelServoL,wheelServoR};
 
@@ -85,4 +94,6 @@ public class SpaghettiHardware
             servo.setPosition(0);
         }
     }
+    */
+
 }

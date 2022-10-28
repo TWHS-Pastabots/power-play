@@ -23,7 +23,7 @@ public class Functions
     public void moveLift(int position)
     {
         //VALUE WILL BE CHANGED
-    hardware.liftMotor.setTargetPosition(position);
+  /*  hardware.liftMotor.setTargetPosition(position);
     hardware.liftMotor2.setTargetPosition(position);
 
     hardware.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -31,10 +31,14 @@ public class Functions
 
     hardware.liftMotor.setPower(1);
     hardware.liftMotor2.setPower(1);
+    */
+
+
+
 
     }
 
-    public void clawGrasp() {
+  /*  public void clawGrasp() {
         if (hardware.clawServo.getPosition() == openClaw) {
             hardware.clawServo.setPosition(closeClaw);
 
@@ -43,6 +47,8 @@ public class Functions
             hardware.clawServo.setPosition(openClaw);
         }
     }
+
+   */
 
     public void wait(int waitTime, Telemetry telemetry) {
         ElapsedTime time = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);

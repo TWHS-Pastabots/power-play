@@ -47,8 +47,8 @@ public class Spaghetti extends OpMode
     {
         drive();
         moveLift();
-        clawGrasp();
-        rotateCone();
+       // clawGrasp();
+       // rotateCone();
     }
 
     private void drive()
@@ -117,7 +117,8 @@ public class Spaghetti extends OpMode
 
         // 3 different set positions
         // Operator
-        if (gamepad2.dpad_up)
+
+       /* if (gamepad2.dpad_up)
         {
             hardware.liftMotor.setTargetPosition(liftPosition + 100);
             hardware.liftMotor2.setTargetPosition(liftPosition + 100);
@@ -144,10 +145,14 @@ public class Spaghetti extends OpMode
         }
 
         liftPosition = hardware.liftMotor.getCurrentPosition();
+ */
+
+        hardware.liftMotor.setPower(gamepad2.left_stick_y * .5);
+        hardware.liftMotor2.setPower(gamepad2.left_stick_y * .5);
 
 
     }
-    private void clawGrasp()
+    /*private void clawGrasp()
     {
         // When claw opens and closes, reset rotating cone servos
         // Operator
@@ -180,7 +185,9 @@ public class Spaghetti extends OpMode
             }
         }
     }
+    */
 
+/*
     private void rotateCone()
     {
         // Rotate cone 90 degrees forwards or backwards
@@ -207,5 +214,7 @@ public class Spaghetti extends OpMode
         }
 
     }
+    */
+
 
 }
