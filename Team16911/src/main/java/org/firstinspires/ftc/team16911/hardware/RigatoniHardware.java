@@ -28,14 +28,15 @@ public class RigatoniHardware
     public Servo rotServo = null;
 
 
-    public void init(HardwareMap hardwareMap) {
-        Assert.assertNotNull(hardwareMap);
-        initializePrimaryMotors(hardwareMap);
-        initializeClawServos(hardwareMap);
-        initializeSupplementaryMotors(hardwareMap);
-
-    }
-    public void initializePrimaryMotors(HardwareMap hardwareMap) {
+//    public void init(HardwareMap hardwareMap)
+//    {
+//        Assert.assertNotNull(hardwareMap);
+//        initializePrimaryMotors(hardwareMap);
+//        initializeClawServos(hardwareMap);
+//        initializeSupplementaryMotors(hardwareMap);
+//    }
+    public void initializePrimaryMotors(HardwareMap hardwareMap)
+    {
         motors = new DcMotorEx[]{leftFront, leftRear, rightFront, rightRear};
 
 
@@ -80,7 +81,16 @@ public class RigatoniHardware
         grabServo.setPosition(0.33);
         rotServo.setDirection(Servo.Direction.FORWARD);
         rotServo.setPosition(0.5);
+    }
+    public void initializeVerticalClaw(HardwareMap hardwareMap)
+    {
+        grabServo = hardwareMap.get(Servo.class, RigatoniIds.GRAB_SERVO);
+        rotServo = hardwareMap.get(Servo.class, RigatoniIds.ROT_SERVO);
 
+        grabServo.setDirection(Servo.Direction.FORWARD);
+        grabServo.setPosition(.1);
+        rotServo.setDirection(Servo.Direction.FORWARD);
+        rotServo.setPosition(.5);
     }
     public void initializeSupplementaryMotors(HardwareMap hardwareMap)
     {

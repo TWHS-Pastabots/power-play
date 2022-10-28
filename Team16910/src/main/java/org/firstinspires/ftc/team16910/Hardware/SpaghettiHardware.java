@@ -62,8 +62,8 @@ public class SpaghettiHardware
         liftMotor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // motors move in opposite direction
-        liftMotor.setDirection(DcMotorEx.Direction.REVERSE);
-        liftMotor2.setDirection(DcMotorEx.Direction.FORWARD);
+        liftMotor.setDirection(DcMotorEx.Direction.FORWARD);
+        liftMotor2.setDirection(DcMotorEx.Direction.REVERSE);
 
 
         liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);

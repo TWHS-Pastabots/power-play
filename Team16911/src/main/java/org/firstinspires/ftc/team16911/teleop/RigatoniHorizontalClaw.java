@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.internal.system.Assert;
 import org.firstinspires.ftc.team16911.hardware.RigatoniHardware;
 
 @TeleOp(name="RigatoniHorizontalClaw")
@@ -16,10 +17,12 @@ public class RigatoniHorizontalClaw extends OpMode
 
     ElapsedTime buttonTime = null;
     @Override
-    public void init() {
-        hardware = new RigatoniHardware();
-        hardware.init(hardwareMap);
-        buttonTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
+    public void init()
+    {
+        Assert.assertNotNull(hardwareMap);
+        hardware.initializePrimaryMotors(hardwareMap);
+        hardware.initializeClawServos(hardwareMap);
+        hardware.initializeSupplementaryMotors(hardwareMap);
     }
 
     @Override
@@ -96,18 +99,26 @@ public class RigatoniHorizontalClaw extends OpMode
     public void rotateClaw()
     {
         //hardware.grabServo.setPower(gamepad2.left_stick_x * .2);
+//        if(gamepad2.circle)
+//            hardware.grabServo.setPosition(.87);
+//        if(gamepad2.square)
+//            hardware.grabServo.setPosition(.330); //.370
+//        double positionRotateServo = hardware.rotServo.getPosition();
+//        if(gamepad2.right_bumper && positionRotateServo != 0) //could be 0, .5, or 1 depending on orientation
+//        {
+//            hardware.rotServo.setPosition(1);
+//        }
+//        if(gamepad2.left_bumper && positionRotateServo != .5) //could be 0, .5, 1 depending on orientation
+//        {
+//            hardware.rotServo.setPosition(.5);
+//        }
         if(gamepad2.circle)
             hardware.grabServo.setPosition(.87);
         if(gamepad2.square)
             hardware.grabServo.setPosition(.330); //.370
-        double positionRotateServo = hardware.rotServo.getPosition();
-        if(gamepad2.right_bumper && positionRotateServo != 0) //could be 0, .5, or 1 depending on orientation
-        {
-            hardware.rotServo.setPosition(1);
-        }
-        if(gamepad2.left_bumper && positionRotateServo != .5) //could be 0, .5, 1 depending on orientation
-        {
+        if(gamepad2.left_bumper)
             hardware.rotServo.setPosition(.5);
-        }
+        if(gamepad2.right_bumper)
+            hardware.rotServo.setPosition(1);
     }
 }

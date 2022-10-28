@@ -5,22 +5,26 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-import org.firstinspires.ftc.team16911.hardware.RigatoniVerticalHardware;
+import org.firstinspires.ftc.robotcore.internal.system.Assert;
+import org.firstinspires.ftc.team16911.hardware.RigatoniHardware;
 
 @TeleOp(name="RigatoniVerticalClaw")
 public class RigatoniVerticalClaw extends OpMode
 {
-    RigatoniVerticalHardware hardware;
+    RigatoniHardware hardware;
     final double FAST_SPEED = .8;
     final double SLOW_SPEED = .5;
     double slowConstant = FAST_SPEED;
 
     ElapsedTime buttonTime = null;
     @Override
-    public void init() {
-        hardware = new RigatoniVerticalHardware();
-        hardware.init(hardwareMap);
-        buttonTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
+    public void init()
+    {
+        Assert.assertNotNull(hardwareMap);
+        hardware.initializePrimaryMotors(hardwareMap);
+        hardware.initializeClawServos(hardwareMap);
+        hardware.initializeSupplementaryMotors(hardwareMap);
+        hardware.initializeVerticalClaw(hardwareMap);
     }
 
     @Override
@@ -97,21 +101,30 @@ public class RigatoniVerticalClaw extends OpMode
     public void rotateClaw()
     {
         //[0.0, 1.0] for range; 0 = 0 deg; 1.0 = 270 deg
-        double rotServoPosition = hardware.rotServo.getPosition(); //CIRCLE = 0 DEG; CROSS = 90 DEG; SQUARE = 180
-        if(gamepad2.cross && Math.abs(rotServoPosition - 0.3333) > 0.018) //10 degree range of error
-        {
-            hardware.rotServo.setPosition(0.3333);
-        }
-        if(gamepad2.circle && Math.abs(rotServoPosition - 0) > 0.018)
-        {
-            hardware.rotServo.setPosition(0);
-        }
-        if(gamepad2.square && Math.abs(rotServoPosition - 0.6666) > 0.018)
-        {
-            hardware.rotServo.setPosition(0.6666);
-        }
-        int rightBumper = gamepad2.right_bumper ? 1 : 0;
-        int leftBumper = gamepad2.left_bumper ? 1 : 0;
-        hardware.grabServo.setPower((rightBumper - leftBumper) * slowConstant);
+//        double rotServoPosition = hardware.rotServo.getPosition(); //CIRCLE = 0 DEG; CROSS = 90 DEG; SQUARE = 180
+//        if(gamepad2.cross && Math.abs(rotServoPosition - 0.3333) > 0.018) //10 degree range of error
+//        {
+//            hardware.rotServo.setPosition(0.3333);
+//        }
+//        if(gamepad2.circle && Math.abs(rotServoPosition - 0) > 0.018)
+//        {
+//            hardware.rotServo.setPosition(0);
+//        }
+//        if(gamepad2.square && Math.abs(rotServoPosition - 0.6666) > 0.018)
+//        {
+//            hardware.rotServo.setPosition(0.6666);
+//        }
+//        int rightBumper = gamepad2.right_bumper ? 1 : 0;
+//        int leftBumper = gamepad2.left_bumper ? 1 : 0;
+//        hardware.grabServo.setPosition((rightBumper - leftBumper) * slowConstant);
+
+        if (gamepad2.triangle)
+            hardware.grabServo.setPosition(.70);
+        if (gamepad2.cross)
+            hardware.grabServo.setPosition(.10);
+        if(gamepad2.right_bumper)
+            hardware.rotServo.setPosition(1);
+        if(gamepad2.left_bumper)
+            hardware.rotServo.setPosition(.5);
     }
 }

@@ -24,7 +24,7 @@ public class RigatoniVerticalHardware
     public DcMotorEx liftArm = null;
 
     // CLaw Servos
-    public CRServo grabServo = null;
+    public Servo grabServo = null;
     public Servo rotServo = null;
 
 
@@ -61,12 +61,6 @@ public class RigatoniVerticalHardware
 
 
         // Set Zero Power Behavior and Initialize Motors
-        for (DcMotorEx motor : motors)
-        {
-            motor.setPower(0);
-            motor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-            motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        }
         leftRear.setPower(0);
         leftRear.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         leftRear.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -86,12 +80,12 @@ public class RigatoniVerticalHardware
     public void initializeClawServos(HardwareMap hardwareMap)
     {
         // Claw Servos
-        grabServo = hardwareMap.get(CRServo.class, RigatoniIds.GRAB_SERVO);
+        grabServo = hardwareMap.get(Servo.class, RigatoniIds.GRAB_SERVO);
         rotServo = hardwareMap.get(Servo.class, RigatoniIds.ROT_SERVO);
 
-        grabServo.setDirection(CRServo.Direction.FORWARD);
+        grabServo.setDirection(Servo.Direction.FORWARD);
         //grabServo.setPosition(.5);
-        grabServo.setPower(0);
+        grabServo.setPosition(0);
         rotServo.setDirection(Servo.Direction.FORWARD);
         rotServo.setPosition(0);
 
