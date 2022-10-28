@@ -32,13 +32,13 @@ public class RigatoniVerticalHardware
     {
         Assert.assertNotNull(hardwareMap);
         initializePrimaryMotors(hardwareMap);
-       // initializeClawServos(hardwareMap);
-
+        initializeClawServos(hardwareMap);
+        initializeSupplementaryMotors(hardwareMap);
 
     }
     public void initializePrimaryMotors(HardwareMap hardwareMap)
     {
-        motors = new DcMotorEx[]{leftFront, leftRear, rightFront, rightRear, liftArm};
+        motors = new DcMotorEx[]{leftFront, leftRear, rightFront, rightRear};
 
 
         // Primary Motors
@@ -67,6 +67,21 @@ public class RigatoniVerticalHardware
             motor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
             motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         }
+        leftRear.setPower(0);
+        leftRear.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        leftRear.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        leftFront.setPower(0);
+        leftFront.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        leftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        rightRear.setPower(0);
+        rightRear.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        rightRear.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        rightFront.setPower(0);
+        rightFront.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
     public void initializeClawServos(HardwareMap hardwareMap)
     {
@@ -80,5 +95,15 @@ public class RigatoniVerticalHardware
         rotServo.setDirection(Servo.Direction.FORWARD);
         rotServo.setPosition(0);
 
+    }
+    public void initializeSupplementaryMotors(HardwareMap hardwareMap)
+    {
+        liftArm = hardwareMap.get(DcMotorEx.class, RigatoniIds.LIFT_ARM_MOTOR);
+
+        liftArm.setDirection(DcMotorSimple.Direction.FORWARD);
+
+        liftArm.setPower(0);
+        liftArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        liftArm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 }
