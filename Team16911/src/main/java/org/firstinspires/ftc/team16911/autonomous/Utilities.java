@@ -36,6 +36,13 @@ public class Utilities
     {
         hardware.rotServo.setPosition (position);
     }
+    public void openClose (boolean shouldOpen)
+    {
+        if(shouldOpen)
+            hardware.grabServo.setPosition(.66);
+        else
+            hardware.grabServo.setPosition(.33);
+    }
     public void liftArm(String pos)
     {
         switch(pos)
@@ -52,4 +59,5 @@ public class Utilities
         }
 
     }
+
 }
