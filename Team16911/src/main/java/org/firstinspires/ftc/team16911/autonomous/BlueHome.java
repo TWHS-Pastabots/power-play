@@ -4,6 +4,7 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.robotcore.internal.system.Assert;
 import org.firstinspires.ftc.team16911.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.team16911.hardware.RigatoniHardware;
 
@@ -18,7 +19,10 @@ public class BlueHome extends LinearOpMode {
     public void runOpMode()
     {
         RigatoniHardware hardware = new RigatoniHardware(); //Horizontal Claw
-        hardware.init(hardwareMap);
+        Assert.assertNotNull(hardwareMap);
+        hardware.initializePrimaryMotors(hardwareMap);
+        hardware.initializeClawServos(hardwareMap);
+        hardware.initializeSupplementaryMotors(hardwareMap);
 
         utilities = new Utilities(hardware);
         drive = new SampleMecanumDrive(hardwareMap);

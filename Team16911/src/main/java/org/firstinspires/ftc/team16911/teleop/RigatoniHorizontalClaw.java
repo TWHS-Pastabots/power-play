@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.internal.system.Assert;
 import org.firstinspires.ftc.team16911.hardware.RigatoniHardware;
 
 @TeleOp(name="RigatoniHorizontalClaw")
@@ -16,10 +17,12 @@ public class RigatoniHorizontalClaw extends OpMode
 
     ElapsedTime buttonTime = null;
     @Override
-    public void init() {
-        hardware = new RigatoniHardware();
-        hardware.init(hardwareMap);
-        buttonTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
+    public void init()
+    {
+        Assert.assertNotNull(hardwareMap);
+        hardware.initializePrimaryMotors(hardwareMap);
+        hardware.initializeClawServos(hardwareMap);
+        hardware.initializeSupplementaryMotors(hardwareMap);
     }
 
     @Override

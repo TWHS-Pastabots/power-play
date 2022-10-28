@@ -5,22 +5,26 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-import org.firstinspires.ftc.team16911.hardware.RigatoniVerticalHardware;
+import org.firstinspires.ftc.robotcore.internal.system.Assert;
+import org.firstinspires.ftc.team16911.hardware.RigatoniHardware;
 
 @TeleOp(name="RigatoniVerticalClaw")
 public class RigatoniVerticalClaw extends OpMode
 {
-    RigatoniVerticalHardware hardware;
+    RigatoniHardware hardware;
     final double FAST_SPEED = .8;
     final double SLOW_SPEED = .5;
     double slowConstant = FAST_SPEED;
 
     ElapsedTime buttonTime = null;
     @Override
-    public void init() {
-        hardware = new RigatoniVerticalHardware();
-        hardware.init(hardwareMap);
-        buttonTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
+    public void init()
+    {
+        Assert.assertNotNull(hardwareMap);
+        hardware.initializePrimaryMotors(hardwareMap);
+        hardware.initializeClawServos(hardwareMap);
+        hardware.initializeSupplementaryMotors(hardwareMap);
+        hardware.initializeVerticalClaw(hardwareMap);
     }
 
     @Override
