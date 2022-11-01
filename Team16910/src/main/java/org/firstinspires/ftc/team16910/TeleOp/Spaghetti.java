@@ -218,7 +218,7 @@ public class Spaghetti extends OpMode
             telemetry.update();
 
         }
-        if (gamepad2.square)
+        if (gamepad2.square)// reset to normal position
         {
             hardware.wheelServoL.setPosition(0.5);
             hardware.wheelServoR.setPosition(0.5);
