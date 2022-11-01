@@ -92,6 +92,7 @@ public class SpaghettiHardware
 
         servos = new Servo[]{clawServo, clawServo2, wheelServoL,wheelServoR};
 
+        //CHANGE TO INIT ALL SERVOS IN CORRECT INDIVIDUAL POSITIONS
         for(Servo servo : servos)
         {
             servo.setDirection(Servo.Direction.FORWARD);

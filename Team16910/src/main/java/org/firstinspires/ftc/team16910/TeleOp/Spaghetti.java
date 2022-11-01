@@ -19,8 +19,10 @@ public class Spaghetti extends OpMode
     double slowConstant = FAST_SPEED;
     ElapsedTime armTime = null;
     ElapsedTime buttonTime = null;
-    final double openClaw = 0.5;
-    final double closeClaw = 0;
+    final double openClaw = 0;
+    final double closeClaw = 1;
+    final double openClaw2 = 1;
+    final double closeClaw2 = 0;
     // Rotating wheels on claw
     final double wheelForward = 0;
     final double wheelBackward = 1;
@@ -151,6 +153,7 @@ public class Spaghetti extends OpMode
     {
         // When claw opens and closes, reset rotating cone servos
         // Operator
+        // MAY BE EASIER TO SET OPEN/CLOSE TO SEPERATE BUTTONS
 
         if (gamepad2.right_bumper)
         {
@@ -159,7 +162,7 @@ public class Spaghetti extends OpMode
             if (hardware.clawServo.getPosition() == openClaw)
             {
                 hardware.clawServo.setPosition(closeClaw);
-                hardware.clawServo2.setPosition(closeClaw);
+                hardware.clawServo2.setPosition(closeClaw2);
 
                telemetry.addData("Servo position:", hardware.clawServo.getPosition());
                telemetry.update();
@@ -167,17 +170,21 @@ public class Spaghetti extends OpMode
             else //if claw is closed
             {
                 hardware.clawServo.setPosition(openClaw);
-                hardware.clawServo2.setPosition(openClaw);
+                hardware.clawServo2.setPosition(openClaw2);
 
+                // Below commented code may not be necessary anymore with updated claw
                 // RESET ROTATING SERVOS
                 // SOME SLEEP OR TIMER METHOD TO WAIT BEFORE RESETTING SERVOS
 
-               //while(hardware.clawServo.getPosition()<.5)
-                //{
+                /*
+                while(hardware.clawServo.getPosition()<.5)
+                {
                     // do nothing until claw is open
-                //}
-                //hardware.wheelServoL.setPosition(0.5);
-                //hardware.wheelServoR.setPosition(0.5);
+                }
+                hardware.wheelServoL.setPosition(0.5);
+                hardware.wheelServoR.setPosition(0.5);
+
+                 */
 
                 telemetry.addData("Servo position:", hardware.clawServo.getPosition());
                 telemetry.update();
