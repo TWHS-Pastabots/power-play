@@ -99,6 +99,7 @@ public class SpaghettiHardware
             servo.setPosition(0);
         }
         clawServo2.setDirection(Servo.Direction.REVERSE);
+        clawServo2.setPosition(0);
     }
 
 
