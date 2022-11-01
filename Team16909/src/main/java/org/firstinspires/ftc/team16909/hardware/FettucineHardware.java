@@ -13,6 +13,7 @@ public class FettucineHardware
     public DcMotorEx rightFront = null;
     public DcMotorEx leftRear = null;
     public DcMotorEx rightRear = null;
+    public DcMotorEx liftMotorOne = null;
     public DcMotorEx[] motors;
 
     public void init(HardwareMap hardwareMap)
@@ -26,13 +27,15 @@ public class FettucineHardware
         rightFront = hardwareMap.get(DcMotorEx.class, FettucineIds.RIGHT_FRONT_MOTOR);
         leftRear = hardwareMap.get(DcMotorEx.class, FettucineIds.LEFT_REAR_MOTOR);
         rightRear = hardwareMap.get(DcMotorEx.class, FettucineIds.RIGHT_REAR_MOTOR);
+        liftMotorOne = hardwareMap.get(DcMotorEx.class, FettucineIds.LIFT_MOTOR_ONE);
 
-        motors = new DcMotorEx[]{leftFront, leftRear, rightFront, rightRear};
+        motors = new DcMotorEx[]{leftFront, leftRear, rightFront, rightRear, liftMotorOne};
 
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFront.setDirection(DcMotorSimple.Direction.FORWARD);
         rightRear.setDirection(DcMotorSimple.Direction.FORWARD);
+        liftMotorOne.setDirection(DcMotorSimple.Direction.FORWARD);
 
         for (DcMotorEx motor : motors) {
             motor.setPower(0.0);

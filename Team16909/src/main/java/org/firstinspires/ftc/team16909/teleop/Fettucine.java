@@ -36,6 +36,7 @@ public class Fettucine extends OpMode
     public void loop()
     {
         drive();
+        lift();
 
     }
 
@@ -99,5 +100,22 @@ public class Fettucine extends OpMode
         hardware.leftRear.setPower(leftRearPower * slowConstant);
         hardware.rightFront.setPower(rightFrontPower * slowConstant);
         hardware.rightRear.setPower(rightRearPower * slowConstant);
+    }
+
+    public void lift()
+    {
+        if (gamepad2.dpad_up)
+        {
+            hardware.liftMotorOne.setPower(.3);
+        }
+
+        else if (gamepad2.dpad_down)
+        {
+            hardware.liftMotorOne.setPower(-.3);
+        }
+        else
+        {
+            hardware.liftMotorOne.setPower(0);
+        }
     }
 }
