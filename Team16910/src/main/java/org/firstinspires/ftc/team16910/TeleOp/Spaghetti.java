@@ -43,12 +43,13 @@ public class Spaghetti extends OpMode
         telemetry.addData("Status", "Started");
         telemetry.update();
     }
+
     public void loop()
     {
         drive();
         moveLift();
-        clawGrasp();
-        rotateCone();
+       // clawGrasp();
+        //rotateCone();
     }
 
     private void drive()
@@ -112,6 +113,7 @@ public class Spaghetti extends OpMode
         hardware.rightFront.setPower(rightFrontPower * slowConstant);
         hardware.rightRear.setPower(rightRearPower * slowConstant);
     }
+
     private void moveLift()
     {
 
@@ -147,12 +149,13 @@ public class Spaghetti extends OpMode
         liftPosition = hardware.liftMotor.getCurrentPosition();
  */
 
-        hardware.liftMotor.setPower(gamepad2.left_stick_y * .2);
-        hardware.liftMotor2.setPower(gamepad2.left_stick_y * .2);
+        hardware.liftMotor.setPower(gamepad2.left_stick_y * .75);
+        hardware.liftMotor2.setPower(gamepad2.left_stick_y * .75);
 
 
     }
-    private void clawGrasp()
+
+   /* private void clawGrasp()
     {
         // When claw opens and closes, reset rotating cone servos
         // Operator
@@ -162,6 +165,7 @@ public class Spaghetti extends OpMode
             if (hardware.clawServo.getPosition() == openClaw)
             {
                 hardware.clawServo.setPosition(closeClaw);
+                hardware.clawServo2.setPosition(closeClaw);
 
                telemetry.addData("Servo position:", hardware.clawServo.getPosition());
                telemetry.update();
@@ -169,6 +173,7 @@ public class Spaghetti extends OpMode
             else //if claw is closed
             {
                 hardware.clawServo.setPosition(openClaw);
+                hardware.clawServo2.setPosition(closeClaw);
 
                 // RESET ROTATING SERVOS
                 // SOME SLEEP OR TIMER METHOD TO WAIT BEFORE RESETTING SERVOS
@@ -185,8 +190,6 @@ public class Spaghetti extends OpMode
             }
         }
     }
-
-
 
     private void rotateCone()
     {
@@ -214,7 +217,6 @@ public class Spaghetti extends OpMode
         }
 
     }
-
-
+    */
 
 }
