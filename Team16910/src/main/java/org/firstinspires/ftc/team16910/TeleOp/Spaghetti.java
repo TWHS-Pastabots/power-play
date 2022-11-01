@@ -21,8 +21,6 @@ public class Spaghetti extends OpMode
     ElapsedTime buttonTime = null;
     final double openClaw = 0;
     final double closeClaw = 1;
-    final double openClaw2 = 1;
-    final double closeClaw2 = 0;
     // Rotating wheels on claw
     final double wheelForward = 0;
     final double wheelBackward = 1;
@@ -162,7 +160,7 @@ public class Spaghetti extends OpMode
             if (hardware.clawServo.getPosition() == openClaw)
             {
                 hardware.clawServo.setPosition(closeClaw);
-                hardware.clawServo2.setPosition(closeClaw2);
+                hardware.clawServo2.setPosition(closeClaw);
 
                telemetry.addData("Servo position:", hardware.clawServo.getPosition());
                telemetry.update();
@@ -170,7 +168,7 @@ public class Spaghetti extends OpMode
             else //if claw is closed
             {
                 hardware.clawServo.setPosition(openClaw);
-                hardware.clawServo2.setPosition(openClaw2);
+                hardware.clawServo2.setPosition(openClaw);
 
                 // Below commented code may not be necessary anymore with updated claw
                 // RESET ROTATING SERVOS
