@@ -90,7 +90,7 @@ public class SpaghettiHardware
         wheelServoL = hardwareMap.get(Servo.class, SpaghettiID.WHEEL_SERVOL);
         wheelServoR = hardwareMap.get(Servo.class, SpaghettiID.WHEEL_SERVOR);
 
-        servos = new Servo[]{clawServo, clawServo2, wheelServoL,wheelServoR};
+        servos = new Servo[]{clawServo, wheelServoL,wheelServoR};
 
         //CHANGE TO INIT ALL SERVOS IN CORRECT INDIVIDUAL POSITIONS
         for(Servo servo : servos)
@@ -98,6 +98,7 @@ public class SpaghettiHardware
             servo.setDirection(Servo.Direction.FORWARD);
             servo.setPosition(0);
         }
+        clawServo2.setDirection(Servo.Direction.REVERSE);
     }
 
 
