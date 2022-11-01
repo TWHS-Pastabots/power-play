@@ -10,7 +10,7 @@ import org.firstinspires.ftc.team16910.Hardware.SpaghettiHardware;
 public class Functions
 {
     //CHANGE THESE VALUES LATER
-    public final int[] junctionheights = {100,200,300};
+    public final int[] juncHeight = {100,200,300};
     final double openClaw = 0.5;
     final double closeClaw = 0;
     private SpaghettiHardware hardware;

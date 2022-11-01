@@ -27,7 +27,7 @@ public class SpaghettiHardware
     {
         Assert.assertNotNull(hardwareMap);
         initializeDriveMotors(hardwareMap);
-      //  initializeClawServos(hardwareMap);
+        initializeClawServos(hardwareMap);
         initializeLiftMotors(hardwareMap);
     }
 
@@ -80,7 +80,7 @@ public class SpaghettiHardware
        // liftMotor2.setTargetPosition(0);
 
     }
-   /* public void initializeClawServos(HardwareMap hardwareMap)
+    public void initializeClawServos(HardwareMap hardwareMap)
     {
         servos = new Servo[]{clawServo,wheelServoL,wheelServoR};
 
@@ -94,6 +94,6 @@ public class SpaghettiHardware
             servo.setPosition(0);
         }
     }
-    */
+
 
 }

@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.team16910.Autonomous;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
@@ -22,16 +23,21 @@ public class RedAway extends LinearOpMode
     private final Pose2d smallJuncRight = new Pose2d(40,-32,Math.toRadians(45));
 
 
+    private final Pose2d park = new Pose2d();
+
+    private Trajectory toScan, toLow, toMed, toHigh, toCones;
+
     public void runOpMode()
     {
         // Initialize Hardware
         SpaghettiHardware hardware = new SpaghettiHardware();
         hardware.init(hardwareMap);
-
+        Functions functions= new Functions(hardware);
 
         // Initialize Mecanum Drive
         drive = new SampleMecanumDrive(hardwareMap);
-        drive.setPoseEstimate(new Pose2d());
+        drive.setPoseEstimate(start);
+        buildTrajectories();
 
         waitForStart();
     }
