@@ -16,19 +16,19 @@ public class SpaghettiHardware
     public DcMotorEx rightRear;
     public DcMotorEx liftMotor;
     public DcMotorEx liftMotor2;
-   // public Servo clawServo;
-   // public Servo clawServo2;
-    //public Servo wheelServoL;
-    //public Servo wheelServoR;
+    public Servo clawServo;
+    public Servo clawServo2;
+    public Servo wheelServoL;
+    public Servo wheelServoR;
 
     public DcMotorEx[] motors;
-  //  public Servo[] servos;
+    public Servo[] servos;
 
     public void init(HardwareMap hardwareMap)
     {
         Assert.assertNotNull(hardwareMap);
         initializeDriveMotors(hardwareMap);
-        //initializeClawServos(hardwareMap);
+        initializeClawServos(hardwareMap);
         initializeLiftMotors(hardwareMap);
     }
 
@@ -81,14 +81,16 @@ public class SpaghettiHardware
        // liftMotor2.setTargetPosition(0);
 
     }
-   /* public void initializeClawServos(HardwareMap hardwareMap)
+    public void initializeClawServos(HardwareMap hardwareMap)
     {
-        servos = new Servo[]{clawServo, clawServo2, wheelServoL,wheelServoR};
+
 
         clawServo = hardwareMap.get(Servo.class, SpaghettiID.CLAW_SERVO);
         clawServo2 = hardwareMap.get(Servo.class, SpaghettiID.CLAW_SERVO2);
         wheelServoL = hardwareMap.get(Servo.class, SpaghettiID.WHEEL_SERVOL);
         wheelServoR = hardwareMap.get(Servo.class, SpaghettiID.WHEEL_SERVOR);
+
+        servos = new Servo[]{clawServo, clawServo2, wheelServoL,wheelServoR};
 
         for(Servo servo : servos)
         {
@@ -96,7 +98,7 @@ public class SpaghettiHardware
             servo.setPosition(0);
         }
     }
-    */
+
 
 
 

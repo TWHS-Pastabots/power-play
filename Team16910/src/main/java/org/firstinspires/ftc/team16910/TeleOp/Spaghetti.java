@@ -43,13 +43,12 @@ public class Spaghetti extends OpMode
         telemetry.addData("Status", "Started");
         telemetry.update();
     }
-
     public void loop()
     {
         drive();
         moveLift();
-       // clawGrasp();
-        //rotateCone();
+        clawGrasp();
+        rotateCone();
     }
 
     private void drive()
@@ -113,14 +112,12 @@ public class Spaghetti extends OpMode
         hardware.rightFront.setPower(rightFrontPower * slowConstant);
         hardware.rightRear.setPower(rightRearPower * slowConstant);
     }
-
     private void moveLift()
     {
 
         // 3 different set positions
         // Operator
-
-       /* if (gamepad2.dpad_up)
+        if (gamepad2.dpad_up)
         {
             hardware.liftMotor.setTargetPosition(liftPosition + 100);
             hardware.liftMotor2.setTargetPosition(liftPosition + 100);
@@ -132,7 +129,7 @@ public class Spaghetti extends OpMode
             hardware.liftMotor2.setPower(1);
 
         }
-        if (gamepad2.dpad_down)
+        if (gamepad1.dpad_down)
         {
             // 100 value should be changed
             hardware.liftMotor.setTargetPosition(liftPosition - 100);
@@ -145,23 +142,20 @@ public class Spaghetti extends OpMode
             hardware.liftMotor2.setPower(1);
 
         }
-
+        
         liftPosition = hardware.liftMotor.getCurrentPosition();
- */
-
-        hardware.liftMotor.setPower(gamepad2.left_stick_y * .75);
-        hardware.liftMotor2.setPower(gamepad2.left_stick_y * .75);
 
 
     }
-
-   /* private void clawGrasp()
+    private void clawGrasp()
     {
         // When claw opens and closes, reset rotating cone servos
         // Operator
 
         if (gamepad2.right_bumper)
         {
+            telemetry.addData("Servo position:", hardware.clawServo.getPosition());
+            telemetry.update();
             if (hardware.clawServo.getPosition() == openClaw)
             {
                 hardware.clawServo.setPosition(closeClaw);
@@ -173,17 +167,17 @@ public class Spaghetti extends OpMode
             else //if claw is closed
             {
                 hardware.clawServo.setPosition(openClaw);
-                hardware.clawServo2.setPosition(closeClaw);
+                hardware.clawServo2.setPosition(openClaw);
 
                 // RESET ROTATING SERVOS
                 // SOME SLEEP OR TIMER METHOD TO WAIT BEFORE RESETTING SERVOS
 
-               while(hardware.clawServo.getPosition()<.5)
-                {
+               //while(hardware.clawServo.getPosition()<.5)
+                //{
                     // do nothing until claw is open
-                }
-                hardware.wheelServoL.setPosition(0.5);
-                hardware.wheelServoR.setPosition(0.5);
+                //}
+                //hardware.wheelServoL.setPosition(0.5);
+                //hardware.wheelServoR.setPosition(0.5);
 
                 telemetry.addData("Servo position:", hardware.clawServo.getPosition());
                 telemetry.update();
@@ -195,6 +189,8 @@ public class Spaghetti extends OpMode
     {
         // Rotate cone 90 degrees forwards or backwards
         // Operator
+        telemetry.addData("button: ", "good");
+        telemetry.update();
         if (gamepad2.triangle)
         {
             // CHANGE WHEELBACK AND WHEELFORWARD VALUES
@@ -205,6 +201,8 @@ public class Spaghetti extends OpMode
             telemetry.update();
 
         }
+        telemetry.addData("button: ", "good");
+        telemetry.update();
         if (gamepad2.cross)
         {
             // CHANGE WHEELBACK AND WHEELFORWARD VALUES
@@ -215,8 +213,15 @@ public class Spaghetti extends OpMode
             telemetry.update();
 
         }
+        if (gamepad2.square)
+        {
+            hardware.wheelServoL.setPosition(0.5);
+            hardware.wheelServoR.setPosition(0.5);
+
+            telemetry.addData("Wheel Position: ", "Reset");
+            telemetry.update();
+        }
 
     }
-    */
 
 }
