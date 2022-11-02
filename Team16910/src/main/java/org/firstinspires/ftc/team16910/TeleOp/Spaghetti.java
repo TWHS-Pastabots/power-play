@@ -152,7 +152,10 @@ public class Spaghetti extends OpMode
     {
         // When claw opens and closes, reset rotating cone servos
         // Operator
-        // MAY BE EASIER TO SET OPEN/CLOSE TO SEPARATE BUTTONS
+
+        // ∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨∨
+        // MAY BE EASIER TO SET OPEN/CLOSE TO SEPARATE BUTTONS!!!
+        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
         if (gamepad2.right_bumper)
         {
