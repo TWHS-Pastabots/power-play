@@ -20,6 +20,7 @@ public class Spaghetti extends OpMode
     ElapsedTime armTime = null;
     ElapsedTime buttonTime = null;
     final double openClaw = 0;
+    final double halfClaw = 0.5;
     final double closeClaw = 1;
     // Rotating wheels on claw
     final double wheelForward = 0;
