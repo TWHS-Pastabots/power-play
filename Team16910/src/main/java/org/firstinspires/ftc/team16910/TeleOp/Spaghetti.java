@@ -195,25 +195,19 @@ public class Spaghetti extends OpMode
     {
         // Rotate cone 90 degrees forwards or backwards
         // Operator
-        telemetry.addData("button: ", "good");
-        telemetry.update();
         if (gamepad2.triangle)
         {
-            // CHANGE WHEELBACK AND WHEELFORWARD VALUES
             hardware.wheelServoL.setPosition(wheelForward);
-            hardware.wheelServoR.setPosition(wheelBackward);
+            hardware.wheelServoR.setPosition(wheelForward);
 
             telemetry.addData("Wheel Position: ", "Forward");
             telemetry.update();
 
         }
-        telemetry.addData("button: ", "good");
-        telemetry.update();
         if (gamepad2.cross)
         {
-            // CHANGE WHEELBACK AND WHEELFORWARD VALUES
             hardware.wheelServoL.setPosition(wheelBackward);
-            hardware.wheelServoR.setPosition(wheelForward);
+            hardware.wheelServoR.setPosition(wheelBackward);
 
             telemetry.addData("Wheel Position: ", "Backward");
             telemetry.update();
