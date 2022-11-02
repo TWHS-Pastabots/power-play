@@ -34,6 +34,7 @@ public class Spaghetti extends OpMode
         hardware = new SpaghettiHardware();
         hardware.init(hardwareMap);
         buttonTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
+        armTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -56,8 +57,8 @@ public class Spaghetti extends OpMode
     {
         // Mecanum drivecode
         // Driver
-        double y = -gamepad1.left_stick_y; // Remember, this is reversed!
-        double x = gamepad1.left_stick_x; // Counteract imperfect strafing
+        double x = -gamepad1.left_stick_y; // Remember, this is reversed!
+        double y = gamepad1.left_stick_x; // Counteract imperfect strafing
         double rx = gamepad1.right_stick_x;
 
         double leftFrontPower = y + x + rx;
@@ -115,10 +116,14 @@ public class Spaghetti extends OpMode
     }
     private void moveLift()
     {
-
         // 3 different set positions
         // Operator
-        if (gamepad2.dpad_up)
+
+        hardware.liftMotor.setPower(gamepad2.left_stick_y);
+        hardware.liftMotor2.setPower(gamepad2.left_stick_y);
+
+
+       /* if (gamepad2.dpad_up && buttonTime.time() >= 500)
         {
             hardware.liftMotor.setTargetPosition(liftPosition + 100);
             hardware.liftMotor2.setTargetPosition(liftPosition + 100);
@@ -130,7 +135,7 @@ public class Spaghetti extends OpMode
             hardware.liftMotor2.setPower(1);
 
         }
-        if (gamepad2.dpad_down)
+        if (gamepad2.dpad_down && buttonTime.time() >= 500)
         {
             // 100 value should be changed
             hardware.liftMotor.setTargetPosition(liftPosition - 100);
@@ -145,6 +150,8 @@ public class Spaghetti extends OpMode
         }
         
         liftPosition = hardware.liftMotor.getCurrentPosition();
+        */
+
 
 
     }
@@ -157,22 +164,24 @@ public class Spaghetti extends OpMode
         // MAY BE EASIER TO SET OPEN/CLOSE TO SEPARATE BUTTONS!!!
         // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-        if (gamepad2.right_bumper)
+        if (gamepad2.right_bumper && buttonTime.time() >= 500)
         {
             telemetry.addData("Servo position:", hardware.clawServo.getPosition());
             telemetry.update();
-            if (hardware.clawServo.getPosition() == openClaw)
+            if (hardware.clawServo.getPosition() == halfClaw)
             {
                 hardware.clawServo.setPosition(closeClaw);
                 hardware.clawServo2.setPosition(closeClaw);
+                buttonTime.reset();
 
                telemetry.addData("Servo position:", hardware.clawServo.getPosition());
                telemetry.update();
             }
-            else //if claw is closed
+            else if (hardware.clawServo.getPosition() == closeClaw)
             {
-                hardware.clawServo.setPosition(openClaw);
-                hardware.clawServo2.setPosition(openClaw);
+                hardware.clawServo.setPosition(halfClaw);
+                hardware.clawServo2.setPosition(halfClaw);
+                buttonTime.reset();
 
                 // Below commented code may not be necessary anymore with updated claw
                 // RESET ROTATING SERVOS
@@ -190,6 +199,15 @@ public class Spaghetti extends OpMode
 
                 telemetry.addData("Servo position:", hardware.clawServo.getPosition());
                 telemetry.update();
+
+            }
+
+            //upon beginning the game, claw only switches between close and half
+            if (hardware.clawServo.getPosition() == openClaw)
+            {
+                hardware.clawServo.setPosition(halfClaw);
+                hardware.clawServo2.setPosition(halfClaw);
+                buttonTime.reset();
             }
         }
     }
