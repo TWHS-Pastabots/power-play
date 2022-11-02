@@ -129,7 +129,7 @@ public class Spaghetti extends OpMode
             hardware.liftMotor2.setPower(1);
 
         }
-        if (gamepad1.dpad_down)
+        if (gamepad2.dpad_down)
         {
             // 100 value should be changed
             hardware.liftMotor.setTargetPosition(liftPosition - 100);
