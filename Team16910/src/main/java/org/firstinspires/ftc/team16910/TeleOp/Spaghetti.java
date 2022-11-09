@@ -26,7 +26,8 @@ public class Spaghetti extends OpMode
     final double wheelForward = 0;
     final double wheelBackward = 1;
 
-    int liftPosition = 0;
+    public final int[] liftPosition = {100,200,300,400};
+    public int currentPosition = 100;
 
     public void init()
     {
@@ -57,13 +58,13 @@ public class Spaghetti extends OpMode
     {
         // Mecanum drivecode
         // Driver
-        double x = -gamepad1.left_stick_y; // Remember, this is reversed!
-        double y = gamepad1.left_stick_x; // Counteract imperfect strafing
+        double y = -gamepad1.left_stick_y; // Remember, this is reversed!
+        double x = gamepad1.left_stick_x; // Counteract imperfect strafing
         double rx = gamepad1.right_stick_x;
 
         double leftFrontPower = y + x + rx;
         double leftRearPower = y - x + rx;
-        double rightFrontPower = y - x - rx;
+        double rightFrontPower = -(y - x - rx);
         double rightRearPower = y + x - rx;
 
         if (Math.abs(leftFrontPower) > 1 || Math.abs(leftRearPower) > 1 ||
@@ -123,10 +124,13 @@ public class Spaghetti extends OpMode
         hardware.liftMotor2.setPower(gamepad2.left_stick_y);
 
 
-       /* if (gamepad2.dpad_up && buttonTime.time() >= 500)
+
+        /*
+        if (gamepad2.dpad_up && buttonTime.time() >= 500)
         {
-            hardware.liftMotor.setTargetPosition(liftPosition + 100);
-            hardware.liftMotor2.setTargetPosition(liftPosition + 100);
+            if (hardware.liftMotor.getCurrentPosition()
+            hardware.liftMotor.setTargetPosition();
+            hardware.liftMotor2.setTargetPosition();
 
             hardware.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             hardware.liftMotor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -138,8 +142,8 @@ public class Spaghetti extends OpMode
         if (gamepad2.dpad_down && buttonTime.time() >= 500)
         {
             // 100 value should be changed
-            hardware.liftMotor.setTargetPosition(liftPosition - 100);
-            hardware.liftMotor2.setTargetPosition(liftPosition - 100);
+            hardware.liftMotor.setTargetPosition();
+            hardware.liftMotor2.setTargetPosition();
 
             hardware.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             hardware.liftMotor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -209,6 +213,17 @@ public class Spaghetti extends OpMode
                 hardware.clawServo2.setPosition(halfClaw);
                 buttonTime.reset();
             }
+
+        }
+        if (gamepad2.left_bumper && buttonTime.time() >= 500)
+        {
+            hardware.clawServo.setPosition(openClaw);
+            hardware.clawServo2.setPosition(openClaw);
+            buttonTime.reset();
+
+            telemetry.addData("Servo position:", hardware.clawServo.getPosition());
+            telemetry.update();
+
         }
     }
 

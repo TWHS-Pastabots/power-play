@@ -66,6 +66,8 @@ public class SpaghettiHardware
         liftMotor.setDirection(DcMotorEx.Direction.REVERSE);
         liftMotor2.setDirection(DcMotorEx.Direction.FORWARD);
 
+        liftMotor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        liftMotor2.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
 
         liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         liftMotor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -77,8 +79,8 @@ public class SpaghettiHardware
         //  liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         // liftMotor2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-      //  liftMotor.setTargetPosition(0);
-       // liftMotor2.setTargetPosition(0);
+      //  liftMotor.setTargetPosition(100);
+       // liftMotor2.setTargetPosition(100);
 
     }
     public void initializeClawServos(HardwareMap hardwareMap)

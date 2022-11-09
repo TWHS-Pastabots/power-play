@@ -22,7 +22,6 @@ public class Functions
 
     public void moveLift(int position)
     {
-        //VALUE WILL BE CHANGED
   /*  hardware.liftMotor.setTargetPosition(position);
     hardware.liftMotor2.setTargetPosition(position);
 
@@ -59,5 +58,5 @@ public class Functions
             telemetry.update();
         }
     }
-    
+
 }
