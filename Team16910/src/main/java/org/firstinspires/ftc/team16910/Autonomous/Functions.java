@@ -11,8 +11,8 @@ public class Functions
 {
     //CHANGE THESE VALUES LATER
     public final int[] juncHeight = {100,200,300};
-    final double openClaw = 0.5;
-    final double closeClaw = 0;
+    final double halfClaw = 0.5;
+    final double closeClaw = 1;
     private SpaghettiHardware hardware;
 
     Functions(SpaghettiHardware hardware)
@@ -38,17 +38,16 @@ public class Functions
 
     }
 
-  /*  public void clawGrasp() {
-        if (hardware.clawServo.getPosition() == openClaw) {
-            hardware.clawServo.setPosition(closeClaw);
-
-        } else //if claw is closed
-        {
-            hardware.clawServo.setPosition(openClaw);
-        }
+    public void openClaw()
+    {
+       hardware.clawServo.setPosition(halfClaw);
+       hardware.clawServo2.setPosition(halfClaw);
     }
-
-   */
+    public void CloseClaw()
+    {
+        hardware.clawServo.setPosition(closeClaw);
+        hardware.clawServo2.setPosition(closeClaw);
+    }
 
     public void wait(int waitTime, Telemetry telemetry) {
         ElapsedTime time = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
@@ -60,6 +59,5 @@ public class Functions
             telemetry.update();
         }
     }
-
-
+    
 }
