@@ -21,9 +21,12 @@ public class BlueAudience extends LinearOpMode
     private final Pose2d medJunc = new Pose2d(-32,32, Math.toRadians(-45));
     private final Pose2d smallJuncLeft = new Pose2d(-32,56,Math.toRadians(-45));
     private final Pose2d smallJuncRight = new Pose2d(-40,32,Math.toRadians(-135));
+
+
     private final Pose2d park = new Pose2d();
 
     private Trajectory toScan, toLow, toMed, toHigh, toCones;
+
 
     public void runOpMode()
     {
