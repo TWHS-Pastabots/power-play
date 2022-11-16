@@ -120,11 +120,11 @@ public class Spaghetti extends OpMode
         // 3 different set positions
         // Operator
 
-      //  hardware.liftMotor.setPower(gamepad2.left_stick_y);
-       // hardware.liftMotor2.setPower(gamepad2.left_stick_y);
+        hardware.liftMotor.setPower(gamepad2.left_stick_y);
+        hardware.liftMotor2.setPower(gamepad2.left_stick_y);
 
         // {100,200,300,400};
-
+    /*
         if (gamepad2.dpad_up && buttonTime.time() >= 500)
         {
             if (hardware.liftMotor.getCurrentPosition() == liftPosition[0])
@@ -167,7 +167,7 @@ public class Spaghetti extends OpMode
             hardware.liftMotor.setPower(1);
             hardware.liftMotor2.setPower(1);
         }
-
+        */
 
     }
 
@@ -213,7 +213,7 @@ public class Spaghetti extends OpMode
         }
         if (gamepad2.left_bumper && buttonTime.time() >= 500)
         {
-            hardware.clawServo.setPosition(0.35);
+            hardware.clawServo.setPosition(0.4);
             hardware.clawServo2.setPosition(0);
             buttonTime.reset();
 
