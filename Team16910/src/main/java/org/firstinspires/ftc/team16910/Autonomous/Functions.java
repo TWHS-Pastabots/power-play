@@ -10,7 +10,7 @@ import org.firstinspires.ftc.team16910.Hardware.SpaghettiHardware;
 public class Functions
 {
     //CHANGE THESE VALUES LATER
-    public final int[] juncHeight = {100,200,300};
+    public final int[] liftPosition = {0,100,200,300};
     final double halfClaw = 0.5;
     final double closeClaw = 1;
     private SpaghettiHardware hardware;
@@ -22,7 +22,7 @@ public class Functions
 
     public void moveLift(int position)
     {
-  /*  hardware.liftMotor.setTargetPosition(position);
+    hardware.liftMotor.setTargetPosition(position);
     hardware.liftMotor2.setTargetPosition(position);
 
     hardware.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -30,11 +30,6 @@ public class Functions
 
     hardware.liftMotor.setPower(1);
     hardware.liftMotor2.setPower(1);
-    */
-
-
-
-
     }
 
     public void openClaw()
@@ -42,10 +37,19 @@ public class Functions
        hardware.clawServo.setPosition(halfClaw);
        hardware.clawServo2.setPosition(halfClaw);
     }
-    public void CloseClaw()
+    public void closeClaw()
     {
         hardware.clawServo.setPosition(closeClaw);
         hardware.clawServo2.setPosition(closeClaw);
+    }
+
+    public void setEncoders(SpaghettiHardware hardware)
+    {
+        for (DcMotorEx motor : hardware.motors) {
+            motor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        }
+        hardware.liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        hardware.liftMotor2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     public void wait(int waitTime, Telemetry telemetry) {

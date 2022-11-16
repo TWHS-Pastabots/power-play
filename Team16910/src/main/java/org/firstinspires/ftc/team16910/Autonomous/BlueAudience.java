@@ -13,19 +13,20 @@ public class BlueAudience extends LinearOpMode
 {
     // Audience- blue on left side, red right
     private SampleMecanumDrive drive;
-
     private final Pose2d start = new Pose2d(-36,64,Math.toRadians(-90));
     private final Pose2d scan = new Pose2d(-36,48,Math.toRadians(-90));
-    private final Pose2d highJuncLeft = new Pose2d(-8,32,Math.toRadians(-45));
+    private final Pose2d highJuncLeft = new Pose2d(0,36,Math.toRadians(-45));
+    private final Pose2d medJunc = new Pose2d(-24,36, Math.toRadians(-45));
+    private final Pose2d midPoint = new Pose2d(-36,36,Math.toRadians(-90));
+    private final Pose2d moveForward = new Pose2d(-24,32,Math.toRadians(-90));
     private final Pose2d highJuncRight = new Pose2d(-32,8,Math.toRadians(-45));
-    private final Pose2d medJunc = new Pose2d(-32,32, Math.toRadians(-45));
     private final Pose2d smallJuncLeft = new Pose2d(-32,56,Math.toRadians(-45));
     private final Pose2d smallJuncRight = new Pose2d(-40,32,Math.toRadians(-135));
 
 
     private final Pose2d park = new Pose2d();
 
-    private Trajectory toScan, toLow, toMed, toHigh, toCones;
+    private Trajectory toScan, toLow, toMidPoint, toMed, toHigh, toCones, moveUp;
 
 
     public void runOpMode()
@@ -33,7 +34,8 @@ public class BlueAudience extends LinearOpMode
         // Initialize Hardware
         SpaghettiHardware hardware = new SpaghettiHardware();
         hardware.init(hardwareMap);
-        Functions functions= new Functions(hardware);
+        Functions function = new Functions(hardware);
+        function.setEncoders(hardware);
 
         // Initialize Mecanum Drive
         drive = new SampleMecanumDrive(hardwareMap);
@@ -41,16 +43,33 @@ public class BlueAudience extends LinearOpMode
         buildTrajectories();
 
         waitForStart();
+        if(!opModeIsActive()) {return;}
 
+        drive.followTrajectory(toMidPoint);
 
-        //moveLift(juncHeight[i]);
+        drive.followTrajectory(toMed);
+
+        function.moveLift(function.liftPosition[2]);
+
+        function.wait(500,telemetry);
+
+        drive.followTrajectory(moveUp);
+
+        function.wait(500,telemetry);
+
+        function.closeClaw();
+
     }
     private void buildTrajectories()
     {
-    toScan =  drive.trajectoryBuilder(drive.getPoseEstimate())
-            .lineToLinearHeading(scan).build();
 
+    toMidPoint = drive.trajectoryBuilder(start)
+            .lineToLinearHeading(midPoint).build();
 
+    toMed = drive.trajectoryBuilder(toMidPoint.end())
+            .lineToLinearHeading(medJunc).build();
 
+    moveUp = drive.trajectoryBuilder(toMed.end())
+            .lineToLinearHeading(moveForward).build();
     }
 }
