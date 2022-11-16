@@ -69,17 +69,17 @@ public class SpaghettiHardware
         liftMotor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
         liftMotor2.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
 
-        //liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        //liftMotor2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        liftMotor2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-       // liftMotor.setTargetPosition(150);
-        //liftMotor2.setTargetPosition(150);
+       liftMotor.setTargetPosition(150);
+       liftMotor2.setTargetPosition(150);
 
-        liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        liftMotor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+       // liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        //liftMotor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        liftMotor.setPower(0);
-        liftMotor2.setPower(0);
+        //liftMotor.setPower(0);
+        //liftMotor2.setPower(0);
 
 
 

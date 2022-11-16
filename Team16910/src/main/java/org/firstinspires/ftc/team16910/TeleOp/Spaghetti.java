@@ -24,7 +24,6 @@ public class Spaghetti extends OpMode
     // Rotating wheels on claw
     final double wheelForward = 0;
     final double wheelBackward = 1;
-
     public final int[] liftPosition = {150,250,350,450};
     public int currentPosition = 150;
 
@@ -120,12 +119,10 @@ public class Spaghetti extends OpMode
         // 3 different set positions
         // Operator
 
-        hardware.liftMotor.setPower(gamepad2.left_stick_y);
-        hardware.liftMotor2.setPower(gamepad2.left_stick_y);
+        //hardware.liftMotor.setPower(gamepad2.left_stick_y);
+        //hardware.liftMotor2.setPower(gamepad2.left_stick_y);
 
-        // {100,200,300,400};
-    /*
-        if (gamepad2.dpad_up && buttonTime.time() >= 500)
+        /*if (gamepad2.dpad_up && buttonTime.time() >= 500)
         {
             if (hardware.liftMotor.getCurrentPosition() == liftPosition[0])
                 currentPosition = liftPosition[1];
@@ -154,8 +151,19 @@ public class Spaghetti extends OpMode
                 currentPosition = liftPosition[1];
             if (hardware.liftMotor.getCurrentPosition() == liftPosition[1])
                 currentPosition = liftPosition[0];
+                */
 
-            telemetry.addData("Arm down:", hardware.liftMotor.getCurrentPosition());
+        if (gamepad2.dpad_left)
+            currentPosition = liftPosition[1];
+        if (gamepad2.dpad_up)
+            currentPosition = liftPosition[3];
+        if (gamepad2.dpad_down)
+            currentPosition = liftPosition[0];
+        if (gamepad2.dpad_right)
+            currentPosition = liftPosition[2];
+
+
+            telemetry.addData("Arm position:", hardware.liftMotor.getCurrentPosition());
             telemetry.update();
 
             hardware.liftMotor.setTargetPosition(currentPosition);
@@ -166,8 +174,6 @@ public class Spaghetti extends OpMode
 
             hardware.liftMotor.setPower(1);
             hardware.liftMotor2.setPower(1);
-        }
-        */
 
     }
 

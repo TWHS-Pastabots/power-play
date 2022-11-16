@@ -35,7 +35,6 @@ public class BlueAudience extends LinearOpMode
         SpaghettiHardware hardware = new SpaghettiHardware();
         hardware.init(hardwareMap);
         Functions function = new Functions(hardware);
-        function.setEncoders(hardware);
 
         // Initialize Mecanum Drive
         drive = new SampleMecanumDrive(hardwareMap);
@@ -47,16 +46,20 @@ public class BlueAudience extends LinearOpMode
 
         drive.followTrajectory(toMidPoint);
 
+        function.wait(500,telemetry);
+
         drive.followTrajectory(toMed);
 
-        function.moveLift(function.liftPosition[2]);
+       // function.moveLift(function.liftPosition[2]);
 
         function.wait(500,telemetry);
 
-        drive.followTrajectory(moveUp);
+        //drive.followTrajectory(moveUp);
+
+        function.openClaw();
 
         function.wait(500,telemetry);
-
+        
         function.closeClaw();
 
     }
