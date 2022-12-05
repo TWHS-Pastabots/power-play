@@ -20,12 +20,10 @@ public class Spaghetti extends OpMode
     ElapsedTime armTime = null;
     ElapsedTime buttonTime = null;
     final double halfClaw = 0.5;
-    final double closeClaw = 1;
+    final double closeClaw = 0;
     // Rotating wheels on claw
     final double wheelForward = 0;
     final double wheelBackward = 1;
-    public final int[] liftPosition = {150,250,350,450};
-    public int currentPosition = 150;
 
     public void init()
     {
@@ -56,7 +54,6 @@ public class Spaghetti extends OpMode
     private void drive()
     {
         // Mecanum drivecode
-        // Driver
         double y = -gamepad1.left_stick_y; // Remember, this is reversed!
         double x = gamepad1.left_stick_x; // Counteract imperfect strafing
         double rx = gamepad1.right_stick_x;
@@ -116,114 +113,53 @@ public class Spaghetti extends OpMode
     }
     private void moveLift()
     {
-        // 3 different set positions
         // Operator
 
-        //hardware.liftMotor.setPower(gamepad2.left_stick_y);
-        //hardware.liftMotor2.setPower(gamepad2.left_stick_y);
-
-        /*if (gamepad2.dpad_up && buttonTime.time() >= 500)
-        {
-            if (hardware.liftMotor.getCurrentPosition() == liftPosition[0])
-                currentPosition = liftPosition[1];
-            if (hardware.liftMotor.getCurrentPosition() == liftPosition[1])
-                currentPosition = liftPosition[2];
-            if (hardware.liftMotor.getCurrentPosition() == liftPosition[2])
-                currentPosition = liftPosition[3];
-
-            telemetry.addData("Arm up:", hardware.liftMotor.getCurrentPosition());
-            telemetry.update();
-
-            hardware.liftMotor.setTargetPosition(currentPosition);
-            hardware.liftMotor2.setTargetPosition(currentPosition);
-
-            hardware.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            hardware.liftMotor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-            hardware.liftMotor.setPower(1);
-            hardware.liftMotor2.setPower(1);
-
-        }
-        if (gamepad2.dpad_down && buttonTime.time() >= 500) {
-            if (hardware.liftMotor.getCurrentPosition() == liftPosition[3])
-                currentPosition = liftPosition[2];
-            if (hardware.liftMotor.getCurrentPosition() == liftPosition[2])
-                currentPosition = liftPosition[1];
-            if (hardware.liftMotor.getCurrentPosition() == liftPosition[1])
-                currentPosition = liftPosition[0];
-                */
-
-        if (gamepad2.dpad_left)
-            currentPosition = liftPosition[1];
-        if (gamepad2.dpad_up)
-            currentPosition = liftPosition[3];
-        if (gamepad2.dpad_down)
-            currentPosition = liftPosition[0];
-        if (gamepad2.dpad_right)
-            currentPosition = liftPosition[2];
-
-
-            telemetry.addData("Arm position:", hardware.liftMotor.getCurrentPosition());
-            telemetry.update();
-
-            hardware.liftMotor.setTargetPosition(currentPosition);
-            hardware.liftMotor2.setTargetPosition(currentPosition);
-
-            hardware.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            hardware.liftMotor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-            hardware.liftMotor.setPower(1);
-            hardware.liftMotor2.setPower(1);
-
+            hardware.liftMotor.setPower(gamepad2.left_stick_y);
+            hardware.liftMotor2.setPower(gamepad2.left_stick_y);
     }
 
     private void clawGrasp()
     {
-
         if (gamepad2.right_bumper && buttonTime.time() >= 500)
         {
-            telemetry.addData("Servo position:", hardware.clawServo.getPosition());
+            telemetry.addData("Servo position:", hardware.leftClaw.getPosition());
             telemetry.update();
-            if (hardware.clawServo.getPosition() == halfClaw)
+            if (hardware.leftClaw.getPosition() == halfClaw)
             {
-                hardware.clawServo.setPosition(closeClaw);
-                hardware.clawServo2.setPosition(closeClaw);
+                hardware.leftClaw.setPosition(closeClaw);
+                hardware.rightClaw.setPosition(closeClaw);
                 buttonTime.reset();
 
-               telemetry.addData("Servo position:", hardware.clawServo.getPosition());
+               telemetry.addData("Servo position:", hardware.leftClaw.getPosition());
                telemetry.update();
             }
-            else if (hardware.clawServo.getPosition() == closeClaw)
+            else if (hardware.leftClaw.getPosition() == closeClaw)
             {
-                hardware.clawServo.setPosition(halfClaw);
-                hardware.clawServo2.setPosition(halfClaw);
+                hardware.leftClaw.setPosition(halfClaw);
+                hardware.rightClaw.setPosition(halfClaw);
                 buttonTime.reset();
 
-                // Below commented code may not be necessary anymore with updated claw
-                // RESET ROTATING SERVOS
-                // SOME SLEEP OR TIMER METHOD TO WAIT BEFORE RESETTING SERVOS
-
-                telemetry.addData("Servo position:", hardware.clawServo.getPosition());
+                telemetry.addData("Servo position:", hardware.leftClaw.getPosition());
                 telemetry.update();
-
             }
+            // upon beginning the game, claw only switches between close and half
 
-            //upon beginning the game, claw only switches between close and half
-            if (hardware.clawServo2.getPosition() == 0)
+            if (hardware.rightClaw.getPosition() == 1)
             {
-                hardware.clawServo.setPosition(halfClaw);
-                hardware.clawServo2.setPosition(halfClaw);
+                hardware.leftClaw.setPosition(halfClaw);
+                hardware.rightClaw.setPosition(halfClaw);
                 buttonTime.reset();
             }
 
         }
         if (gamepad2.left_bumper && buttonTime.time() >= 500)
         {
-            hardware.clawServo.setPosition(0.4);
-            hardware.clawServo2.setPosition(0);
+            hardware.leftClaw.setPosition(1);
+            hardware.rightClaw.setPosition(1);
             buttonTime.reset();
 
-            telemetry.addData("Servo position:", hardware.clawServo.getPosition());
+            telemetry.addData("Servo position:", hardware.leftClaw.getPosition());
             telemetry.update();
 
         }
@@ -231,8 +167,8 @@ public class Spaghetti extends OpMode
 
     private void rotateCone()
     {
-        // Rotate cone 90 degrees forwards or backwards
-        // Operator
+        // rotate cone 90 degrees forwards or backwards
+        // operator
         if (gamepad2.triangle)
         {
             hardware.wheelServoL.setPosition(wheelForward);

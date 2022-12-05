@@ -9,8 +9,6 @@ import org.firstinspires.ftc.team16910.Hardware.SpaghettiHardware;
 
 public class Functions
 {
-    //CHANGE THESE VALUES LATER
-    public final int[] liftPosition = {0,100,200,300};
     final double halfClaw = 0.5;
     final double closeClaw = 1;
     private SpaghettiHardware hardware;
@@ -20,36 +18,32 @@ public class Functions
         this.hardware = hardware;
     }
 
+
     public void moveLift(int position)
     {
-    hardware.liftMotor.setTargetPosition(position);
-    hardware.liftMotor2.setTargetPosition(position);
+        hardware.liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        hardware.liftMotor2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-    hardware.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-    hardware.liftMotor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.liftMotor.setTargetPosition(hardware.liftMotor.getCurrentPosition() + position);
+        hardware.liftMotor2.setTargetPosition(hardware.liftMotor.getCurrentPosition() + position);
 
-    hardware.liftMotor.setPower(1);
-    hardware.liftMotor2.setPower(1);
+        hardware.liftMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        hardware.liftMotor2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+
+        hardware.liftMotor.setPower(1);
+        hardware.liftMotor2.setPower(1);
+
     }
 
     public void openClaw()
     {
-       hardware.clawServo.setPosition(halfClaw);
-       hardware.clawServo2.setPosition(halfClaw);
+       hardware.leftClaw.setPosition(halfClaw);
+       hardware.rightClaw.setPosition(halfClaw);
     }
     public void closeClaw()
     {
-        hardware.clawServo.setPosition(closeClaw);
-        hardware.clawServo2.setPosition(closeClaw);
-    }
-
-    public void setEncoders(SpaghettiHardware hardware)
-    {
-        for (DcMotorEx motor : hardware.motors) {
-            motor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-        }
-        hardware.liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        hardware.liftMotor2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        hardware.leftClaw.setPosition(closeClaw);
+        hardware.rightClaw.setPosition(closeClaw);
     }
 
     public void wait(int waitTime, Telemetry telemetry) {
