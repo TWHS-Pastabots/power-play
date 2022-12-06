@@ -19,6 +19,7 @@ public class Functions
     }
 
 
+
     public void moveLift(int position)
     {
         hardware.liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -34,8 +35,12 @@ public class Functions
         hardware.liftMotor2.setPower(1);
 
     }
-
     public void openClaw()
+    {
+        hardware.leftClaw.setPosition(0);
+        hardware.rightClaw.setPosition(0);
+    }
+    public void halfClaw()
     {
        hardware.leftClaw.setPosition(halfClaw);
        hardware.rightClaw.setPosition(halfClaw);

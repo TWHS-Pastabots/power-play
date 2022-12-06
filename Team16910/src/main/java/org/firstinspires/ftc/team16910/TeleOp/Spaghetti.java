@@ -20,7 +20,7 @@ public class Spaghetti extends OpMode
     ElapsedTime armTime = null;
     ElapsedTime buttonTime = null;
     final double halfClaw = 0.5;
-    final double closeClaw = 0;
+    final double closeClaw = 1;
     // Rotating wheels on claw
     final double wheelForward = 0;
     final double wheelBackward = 1;
@@ -117,6 +117,12 @@ public class Spaghetti extends OpMode
 
             hardware.liftMotor.setPower(gamepad2.left_stick_y);
             hardware.liftMotor2.setPower(gamepad2.left_stick_y);
+
+            if (gamepad2.dpad_up)
+            {
+                hardware.liftMotor.setPower(-gamepad2.left_stick_y);
+                hardware.liftMotor2.setPower(-gamepad2.left_stick_y);
+            }
     }
 
     private void clawGrasp()
@@ -145,7 +151,7 @@ public class Spaghetti extends OpMode
             }
             // upon beginning the game, claw only switches between close and half
 
-            if (hardware.rightClaw.getPosition() == 1)
+            if (hardware.rightClaw.getPosition() == 0)
             {
                 hardware.leftClaw.setPosition(halfClaw);
                 hardware.rightClaw.setPosition(halfClaw);
@@ -155,8 +161,8 @@ public class Spaghetti extends OpMode
         }
         if (gamepad2.left_bumper && buttonTime.time() >= 500)
         {
-            hardware.leftClaw.setPosition(1);
-            hardware.rightClaw.setPosition(1);
+            hardware.leftClaw.setPosition(0);
+            hardware.rightClaw.setPosition(0);
             buttonTime.reset();
 
             telemetry.addData("Servo position:", hardware.leftClaw.getPosition());

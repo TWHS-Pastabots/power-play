@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.team16910.Hardware.SpaghettiHardware;
 import org.firstinspires.ftc.team16910.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.team16910.trajectorysequence.TrajectorySequence;
 
 @Autonomous(name= "Right")
 public class Right extends LinearOpMode
@@ -14,37 +15,13 @@ public class Right extends LinearOpMode
     // Audience- blue on left side, red right
     private SampleMecanumDrive drive;
 
-    private final String parkOneStr = "ParkOne";
-    private final String parkTwoStr = "ParkTwo";
-    private final String parkThreeStr = "ParkThree";
-
     private final Pose2d start = new Pose2d(-36,64,Math.toRadians(-90));
-    private final Pose2d scan = new Pose2d(-36,48,Math.toRadians(-90));
-    private final Pose2d highJuncLeft = new Pose2d(0,36,Math.toRadians(-90));
-    private final Pose2d medJunc = new Pose2d(-24,40, Math.toRadians(-90));
-    private final Pose2d midPoint = new Pose2d(-36,16,Math.toRadians(-90));
-    private final Pose2d moveForward = new Pose2d(-24,10,Math.toRadians(-90));
-    private final Pose2d hiJunR = new Pose2d(-24,16,Math.toRadians(-90));
-    private final Pose2d smallJuncLeft = new Pose2d(-32,56,Math.toRadians(-90));
-    private final Pose2d smallJuncRight = new Pose2d(-40,32,Math.toRadians(-90));
-    private final Pose2d cones =  new Pose2d(-56,16,Math.toRadians(-90));
-    private final Pose2d coneUp = new Pose2d(-62,16,Math.toRadians(90));
+
+    private TrajectorySequence toScan, toLow, toMidPoint, toMidPointB, moveBackToJunc,
+            toMed, toHigh, toHighB, toCones, moveUp, moveUpCone, moveBack, adjust, adjust2;
 
 
-    private final Pose2d parkOne = new Pose2d();
-    private final Pose2d parkTwo = new Pose2d();
-    private final Pose2d parkThree = new Pose2d();
-
-    int initLift;
-
-
-
-
-    private Trajectory toScan, toLow, toMidPoint, toMidPointB, moveBackToJunc, toMed, toHigh, toHighB, toCones, moveUp, moveUpCone, moveBack;
-
-
-    public void runOpMode()
-    {
+    public void runOpMode() throws InterruptedException {
         // Initialize Hardware
         SpaghettiHardware hardware = new SpaghettiHardware();
         hardware.init(hardwareMap);
@@ -59,45 +36,57 @@ public class Right extends LinearOpMode
         if(!opModeIsActive()) {return;}
 
         // test lift
+        //7.5 rotations  537.6 ticks per revolution
 
 
-        //function.moveLift();
-        //wait(1000);
-        //function.moveLift();
+       // function.moveLift(3800);
+        //function.wait(4600, telemetry);
 
 
-
+        //function.halfClaw();
+        //function.moveLift(-3800);
+        //function.wait(4600, telemetry);
 
 
         // cycle one
 
 
+        drive.followTrajectorySequence(adjust);
+        function.halfClaw();
+        drive.followTrajectorySequence(adjust2);
+        function.wait(1000,telemetry);
         function.closeClaw();
+        function.wait(1000,telemetry);
 
-        function.wait(500,telemetry);
 
-        drive.followTrajectory(toHigh);
 
-       // function.liftHigh();
+        drive.followTrajectorySequence(toHigh);
 
-        drive.followTrajectory(moveUp);
+        function.moveLift(3800);
+        function.wait(4600, telemetry);
 
-        function.wait(500,telemetry);
+        drive.followTrajectorySequence(moveUp);
+
+        function.wait(1000, telemetry);
 
         function.openClaw();
+
+        function.moveLift(-2600);
+        function.wait(3300, telemetry);
+
+        function.halfClaw();
+
 
         // cycle two
 
 
         //parking
 
-
-
     }
 
     private void moveCycle(Functions function,int height)
     {
-
+ /*
         drive.followTrajectory(moveBack);
 
         // function.liftLow();
@@ -118,19 +107,32 @@ public class Right extends LinearOpMode
 
         function.openClaw();
 
+  */
+
     }
 
     private void buildTrajectories()
     {
-/*
-        toHigh = drive.trajectorySequenceBuilder(drive.getPoseEstimate())
-                .forward()
-                .strafeLeft()
+
+        adjust = drive.trajectorySequenceBuilder(drive.getPoseEstimate())
+                .forward(3.2)
+                .build();
+
+        adjust2 = drive.trajectorySequenceBuilder(adjust.end())
+                .back(2.5)
+                .build();
+
+        toHigh = drive.trajectorySequenceBuilder(adjust2.end())
+                .forward(50)
+                .turn(Math.toRadians(42)) //left 45
                 .build();
 
         moveUp = drive.trajectorySequenceBuilder(toHigh.end())
-                .forward()
+                .forward(6.5)
                 .build();
+
+
+        /*
 
         moveBack = drive.trajectorySequenceBuilder(moveUp.end())
                 .back()
@@ -151,7 +153,8 @@ public class Right extends LinearOpMode
                 .back() //till junction //lift will be lifted
                 .turn(Math.toRadians(-90))
                 .build();
-                */
+
+        */
 
 
     }

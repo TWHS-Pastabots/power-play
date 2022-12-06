@@ -90,9 +90,9 @@ public class SpaghettiHardware
         wheelServoR.setDirection(Servo.Direction.REVERSE);
         wheelServoR.setPosition(.5);
         leftClaw.setDirection(Servo.Direction.REVERSE);
-        leftClaw.setPosition(1);
+        leftClaw.setPosition(0);
         rightClaw.setDirection(Servo.Direction.FORWARD);
-        rightClaw.setPosition(1);
+        rightClaw.setPosition(0);
     }
 
 }
