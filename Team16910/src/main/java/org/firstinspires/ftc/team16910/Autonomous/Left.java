@@ -9,24 +9,53 @@ import org.firstinspires.ftc.team16910.Hardware.SpaghettiHardware;
 import org.firstinspires.ftc.team16910.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.team16910.trajectorysequence.TrajectorySequence;
 
+import org.openftc.easyopencv.OpenCvCamera;
+import org.openftc.easyopencv.OpenCvCameraFactory;
+import org.openftc.easyopencv.OpenCvCameraRotation;
+import org.openftc.easyopencv.OpenCvInternalCamera;
+
 @Autonomous(name= "Left")
 public class Left extends LinearOpMode
 {
-    // Audience- blue on left side, red right
+    //yellow location 2
+    //magenta location 1
+    //cyan location 3
+
     private SampleMecanumDrive drive;
-
     private final Pose2d start = new Pose2d(36,64,Math.toRadians(-90));
-
     private TrajectorySequence toScan, toLow, toMidPoint, toMidPointB, moveBackToJunc,
-            toMed, toHigh, toHighB, toCones, moveUp, moveUpCone, moveBack, adjust;
+            toMed, toHigh, toHighB, toCones, moveUp, moveUpCone, moveBack, adjust, adjust2,
+            park1,park3;
 
+    private OpenCvInternalCamera cam;
+    private CVPipeline openSleeve;
 
-    public void runOpMode()
+    public void runOpMode() throws InterruptedException
     {
         // Initialize Hardware
         SpaghettiHardware hardware = new SpaghettiHardware();
         hardware.init(hardwareMap);
         Functions function = new Functions(hardware);
+
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        cam = OpenCvCameraFactory.getInstance().createInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
+        openSleeve = new CVPipeline();
+        cam.setViewportRenderingPolicy(OpenCvCamera.ViewportRenderingPolicy.OPTIMIZE_VIEW);
+
+        cam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
+        {
+            @Override
+            public void onOpened()
+            {
+                cam.setPipeline(openSleeve);
+                cam.startStreaming(360, 320, OpenCvCameraRotation.UPRIGHT);
+            }
+            @Override
+            public void onError(int errorCode)
+            {
+                //camera not opened
+            }
+        });
 
         // Initialize Mecanum Drive
         drive = new SampleMecanumDrive(hardwareMap);
@@ -36,137 +65,75 @@ public class Left extends LinearOpMode
         waitForStart();
         if(!opModeIsActive()) {return;}
 
-        // test lift
-        //7.5 rotations  537.6 ticks per revolution
-
-
-        function.moveLift(3800);
-        function.wait(4600, telemetry);
-
-        function.halfClaw();
-        function.moveLift(-3800);
-        function.wait(4600, telemetry);
-
         // cycle one
-
-
         drive.followTrajectorySequence(adjust);
-
         function.halfClaw();
-
-        function.wait(500,telemetry);
-
+        drive.followTrajectorySequence(adjust2);
+        function.wait(1000,telemetry);
         function.closeClaw();
+        function.wait(1000,telemetry);
 
+        function.moveLift(800);
+        function.wait(2400, telemetry);
 
-        /*
+        int location = openSleeve.getDestination(); //scan
 
+        drive.followTrajectorySequence(toHigh);
 
-        function.wait(500,telemetry);
+        function.moveLift(950);
+        function.wait(2600, telemetry);
 
-        drive.followTrajectory(toHigh);
+        drive.followTrajectorySequence(moveUp);
 
-        function.moveLift(3800);
-        function.wait(4600, telemetry);
-
-        drive.followTrajectory(moveUp);
-
-        function.wait(500,telemetry);
-
-        function.halfClaw();
-
-        function.wait(500,telemetry);
-
-        function.moveLift(-3800);
-        function.wait(4400, telemetry);
-
-
-
-         */
-
-
-
-
-
-
-
-
-
-
-        // cycle two
-
-
-        //parking
-
-    }
-
-    private void moveCycle(Functions function,int height)
-    {
- /*
-        drive.followTrajectory(moveBack);
-
-        // function.liftLow();
-
-        drive.followTrajectory(toCones);
-
-        //function.lift(height)   ///cone height //must be adjusted every cycle
-
-        function.closeClaw();
-
-        //function.lift //above cone height
-
-        drive.followTrajectory(moveBackToJunc);
-
-      //  function.lift //high junc height
-
-        drive.followTrajectory(moveUpCone);
+        function.wait(1000, telemetry);
 
         function.openClaw();
 
-  */
+        function.moveLift(-2200);
+        function.wait(3200, telemetry);
 
+        drive.followTrajectorySequence(moveBack);
+
+    //    if (location ==1)
+      //      drive.followTrajectorySequence(park1);
+      //  if (location == 3)
+      //      drive.followTrajectorySequence(park3);
     }
-
+    private void moveCycle(Functions function,int height)
+    {}
     private void buildTrajectories()
     {
 
         adjust = drive.trajectorySequenceBuilder(drive.getPoseEstimate())
-                .back(1)
+                .forward(3.2)
                 .build();
 
-        /*
-        toHigh = drive.trajectorySequenceBuilder(adjust.end())
-                .forward()
-                .turn(Math.toRadians(-45)) //right 45
+        adjust2 = drive.trajectorySequenceBuilder(adjust.end())
+                .back(3)
+                .build();
+
+        toHigh = drive.trajectorySequenceBuilder(adjust2.end())
+                .forward(50)
+                .turn(Math.toRadians(-42))
                 .build();
 
         moveUp = drive.trajectorySequenceBuilder(toHigh.end())
-                .forward()
+                .forward(4)
                 .build();
-
-        /*
 
         moveBack = drive.trajectorySequenceBuilder(moveUp.end())
-                .back()
+                .back(4)
+                .turn(Math.toRadians(42))
                 .build();
 
-        toCones = drive.trajectorySequenceBuilder(moveBack.end())
+        park1 = drive.trajectorySequenceBuilder(moveBack.end())
                 .turn(Math.toRadians(90))
-                .forward()
-                .strafeLeft() //slight adjustment to pick up cones
+                .forward(10)
                 .build();
-
-        moveUpCone = drive.trajectorySequenceBuilder(toCones.end())
-                .forward() //slight amount
-                .build();
-
-        moveBackToJunc = drive.trajectorySequenceBuilder(moveUpCone.end())
-                .strafeRight() //slight amount to readjust
-                .back() //till junction //lift will be lifted
+        park3 = drive.trajectorySequenceBuilder(moveBack.end())
                 .turn(Math.toRadians(-90))
+                .forward(10)
                 .build();
-        */
-
-
     }
 }
+

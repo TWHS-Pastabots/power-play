@@ -177,8 +177,8 @@ public class Spaghetti extends OpMode
         // operator
         if (gamepad2.triangle)
         {
-            hardware.wheelServoL.setPosition(wheelForward);
-            hardware.wheelServoR.setPosition(wheelForward);
+            hardware.wheelServoL.setPosition(wheelBackward);
+            hardware.wheelServoR.setPosition(wheelBackward);
 
             telemetry.addData("Wheel Position: ", "Forward");
             telemetry.update();
@@ -186,8 +186,8 @@ public class Spaghetti extends OpMode
         }
         if (gamepad2.cross)
         {
-            hardware.wheelServoL.setPosition(wheelBackward);
-            hardware.wheelServoR.setPosition(wheelBackward);
+            hardware.wheelServoL.setPosition(wheelForward);
+            hardware.wheelServoR.setPosition(wheelForward);
 
             telemetry.addData("Wheel Position: ", "Backward");
             telemetry.update();
