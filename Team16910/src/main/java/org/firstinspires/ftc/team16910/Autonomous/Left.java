@@ -22,7 +22,7 @@ public class Left extends LinearOpMode
     //cyan location 3
 
     private SampleMecanumDrive drive;
-    private final Pose2d start = new Pose2d(36,64,Math.toRadians(-90));
+    private final Pose2d start = new Pose2d(-36,64,Math.toRadians(-90));
     private TrajectorySequence toScan, toLow, toMidPoint, toMidPointB, moveBackToJunc,
             toMed, toHigh, toHighB, toCones, moveUp, moveUpCone, moveBack, adjust, adjust2,
             park1,park3;
@@ -48,7 +48,7 @@ public class Left extends LinearOpMode
             public void onOpened()
             {
                 cam.setPipeline(openSleeve);
-                cam.startStreaming(360, 320, OpenCvCameraRotation.UPRIGHT);
+                cam.startStreaming(640, 480, OpenCvCameraRotation.UPRIGHT);
             }
             @Override
             public void onError(int errorCode)
@@ -66,22 +66,26 @@ public class Left extends LinearOpMode
         if(!opModeIsActive()) {return;}
 
         // cycle one
+        // updated
+        function.wait(500,telemetry);
+        int location = openSleeve.getDestination(); //scan
+
+        telemetry.addData("location: ", location);
+        telemetry.update();
+
         drive.followTrajectorySequence(adjust);
         function.halfClaw();
         drive.followTrajectorySequence(adjust2);
+        function.moveLift(-1000);
+        function.wait(3000, telemetry);
         function.wait(1000,telemetry);
         function.closeClaw();
         function.wait(1000,telemetry);
 
-        function.moveLift(800);
-        function.wait(2400, telemetry);
-
-        int location = openSleeve.getDestination(); //scan
-
         drive.followTrajectorySequence(toHigh);
 
-        function.moveLift(950);
-        function.wait(2600, telemetry);
+        function.moveLift(3000);
+        function.wait(5400, telemetry);
 
         drive.followTrajectorySequence(moveUp);
 
@@ -89,15 +93,24 @@ public class Left extends LinearOpMode
 
         function.openClaw();
 
-        function.moveLift(-2200);
-        function.wait(3200, telemetry);
+        function.moveLift(-1000);
+        function.wait(3000, telemetry);
 
         drive.followTrajectorySequence(moveBack);
+        function.wait(1000,telemetry);
 
-    //    if (location ==1)
-      //      drive.followTrajectorySequence(park1);
-      //  if (location == 3)
-      //      drive.followTrajectorySequence(park3);
+        if (location ==1)
+            drive.followTrajectorySequence(park1);
+        function.wait(1000,telemetry);
+        if (location == 3)
+            drive.followTrajectorySequence(park3);
+        function.wait(1000,telemetry);
+        if (location == 2)
+        {
+            telemetry.addData("Position: ", "parked");
+            telemetry.update();
+        }
+
     }
     private void moveCycle(Functions function,int height)
     {}
@@ -113,27 +126,26 @@ public class Left extends LinearOpMode
                 .build();
 
         toHigh = drive.trajectorySequenceBuilder(adjust2.end())
-                .forward(50)
+                .forward(51)
                 .turn(Math.toRadians(-42))
                 .build();
 
         moveUp = drive.trajectorySequenceBuilder(toHigh.end())
-                .forward(4)
+                .forward(3.5)
                 .build();
 
         moveBack = drive.trajectorySequenceBuilder(moveUp.end())
-                .back(4)
+                .back(3.7)
                 .turn(Math.toRadians(42))
                 .build();
 
         park1 = drive.trajectorySequenceBuilder(moveBack.end())
                 .turn(Math.toRadians(90))
-                .forward(10)
+                .forward(20)
                 .build();
         park3 = drive.trajectorySequenceBuilder(moveBack.end())
                 .turn(Math.toRadians(-90))
-                .forward(10)
+                .forward(20)
                 .build();
     }
 }
-

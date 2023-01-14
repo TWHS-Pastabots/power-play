@@ -48,7 +48,7 @@ public class Right extends LinearOpMode
             public void onOpened()
             {
                 cam.setPipeline(openSleeve);
-                cam.startStreaming(360, 320, OpenCvCameraRotation.UPRIGHT);
+                cam.startStreaming(640, 480, OpenCvCameraRotation.UPRIGHT);
             }
             @Override
             public void onError(int errorCode)
@@ -66,73 +66,97 @@ public class Right extends LinearOpMode
         if(!opModeIsActive()) {return;}
 
         // cycle one
-        drive.followTrajectorySequence(adjust);
-        function.halfClaw();
-        drive.followTrajectorySequence(adjust2);
-        function.wait(1000,telemetry);
-        function.closeClaw();
-        function.wait(1000,telemetry);
-
-        function.moveLift(800);
-        function.wait(2400, telemetry);
-
+        // updated
+        function.wait(500,telemetry);
         int location = openSleeve.getDestination(); //scan
 
+        telemetry.addData("location: ", location);
+        telemetry.update();
+
+        drive.followTrajectorySequence(adjust);
+
+        function.halfClaw();
+        drive.followTrajectorySequence(adjust2);
+        function.moveLift(1000);
+        function.wait(500, telemetry);
+        function.closeClaw();
+
+      //  function.moveLift(-500);
+      //  function.wait(500, telemetry);
+
+
+        function.wait(800,telemetry);
         drive.followTrajectorySequence(toHigh);
 
-        function.moveLift(950);
-        function.wait(2600, telemetry);
+        function.moveLift(-4600);
+        function.wait(10000, telemetry);
+
+
+        //function.moveLift(-4100);
+        //function.wait(10000, telemetry);
 
         drive.followTrajectorySequence(moveUp);
-
-        function.wait(1000, telemetry);
-
+        function.wait(2800, telemetry);
         function.openClaw();
-
-        function.moveLift(-2200);
-        function.wait(3200, telemetry);
-
+        function.moveLift(2000);
+        function.wait(1000, telemetry);
         drive.followTrajectorySequence(moveBack);
+        function.wait(1000,telemetry);
 
         if (location ==1)
             drive.followTrajectorySequence(park1);
+        function.wait(1000,telemetry);
         if (location == 3)
             drive.followTrajectorySequence(park3);
+        function.wait(1000,telemetry);
+        if (location == 2)
+        {
+            telemetry.addData("Position: ", "parked");
+            telemetry.update();
+            function.wait(1000, telemetry);
+        }
+
+
+
     }
     private void moveCycle(Functions function,int height)
-    {}
+    {
+
+
+
+    }
     private void buildTrajectories()
     {
 
         adjust = drive.trajectorySequenceBuilder(drive.getPoseEstimate())
-                .forward(3.2)
+                .forward(2.8)
                 .build();
 
         adjust2 = drive.trajectorySequenceBuilder(adjust.end())
-                .back(3)
+                .back(2.3)
                 .build();
 
         toHigh = drive.trajectorySequenceBuilder(adjust2.end())
-                .forward(50)
-                .turn(Math.toRadians(42))
+                .forward(51)
+                .turn(Math.toRadians(47.2))
                 .build();
 
         moveUp = drive.trajectorySequenceBuilder(toHigh.end())
-                .forward(4)
+                .forward(2.8)
                 .build();
 
         moveBack = drive.trajectorySequenceBuilder(moveUp.end())
-                .back(4)
-                .turn(Math.toRadians(-42))
+                .back(3.7)
+                .turn(Math.toRadians(-47.2))
                 .build();
 
         park1 = drive.trajectorySequenceBuilder(moveBack.end())
                 .turn(Math.toRadians(90))
-                .forward(10)
+                .forward(21)
                 .build();
         park3 = drive.trajectorySequenceBuilder(moveBack.end())
                 .turn(Math.toRadians(-90))
-                .forward(10)
+                .forward(23)
                 .build();
     }
 }

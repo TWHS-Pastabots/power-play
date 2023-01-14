@@ -21,9 +21,6 @@ public class Spaghetti extends OpMode
     ElapsedTime buttonTime = null;
     final double halfClaw = 0.5;
     final double closeClaw = 1;
-    // Rotating wheels on claw
-    final double wheelForward = 0;
-    final double wheelBackward = 1;
 
     public void init()
     {
@@ -48,7 +45,6 @@ public class Spaghetti extends OpMode
         drive();
         moveLift();
         clawGrasp();
-        rotateCone();
     }
 
     private void drive()
@@ -114,15 +110,14 @@ public class Spaghetti extends OpMode
     private void moveLift()
     {
         // Operator
+        if (gamepad2.dpad_up && buttonTime.time() >= 500)
+        {
+            hardware.liftMotor.setPower(-gamepad2.left_stick_y);
+            hardware.liftMotor2.setPower(-gamepad2.left_stick_y);
+        }
 
             hardware.liftMotor.setPower(gamepad2.left_stick_y);
             hardware.liftMotor2.setPower(gamepad2.left_stick_y);
-
-            if (gamepad2.dpad_up)
-            {
-                hardware.liftMotor.setPower(-gamepad2.left_stick_y);
-                hardware.liftMotor2.setPower(-gamepad2.left_stick_y);
-            }
     }
 
     private void clawGrasp()
@@ -168,38 +163,6 @@ public class Spaghetti extends OpMode
             telemetry.addData("Servo position:", hardware.leftClaw.getPosition());
             telemetry.update();
 
-        }
-    }
-
-    private void rotateCone()
-    {
-        // rotate cone 90 degrees forwards or backwards
-        // operator
-        if (gamepad2.triangle)
-        {
-            hardware.wheelServoL.setPosition(wheelBackward);
-            hardware.wheelServoR.setPosition(wheelBackward);
-
-            telemetry.addData("Wheel Position: ", "Forward");
-            telemetry.update();
-
-        }
-        if (gamepad2.cross)
-        {
-            hardware.wheelServoL.setPosition(wheelForward);
-            hardware.wheelServoR.setPosition(wheelForward);
-
-            telemetry.addData("Wheel Position: ", "Backward");
-            telemetry.update();
-
-        }
-        if (gamepad2.square)// reset to normal position
-        {
-            hardware.wheelServoL.setPosition(0.5);
-            hardware.wheelServoR.setPosition(0.5);
-
-            telemetry.addData("Wheel Position: ", "Reset");
-            telemetry.update();
         }
 
     }

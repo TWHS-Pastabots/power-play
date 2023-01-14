@@ -16,13 +16,12 @@ public class SpaghettiHardware
     public DcMotorEx rightRear;
     public DcMotorEx liftMotor;
     public DcMotorEx liftMotor2;
+    //public DcMotorEx liftMotor3;
+    //public DcMotorEx liftMotor4;
     public Servo leftClaw;
     public Servo rightClaw;
-    public Servo wheelServoL;
-    public Servo wheelServoR;
 
     public DcMotorEx[] motors;
-    public Servo[] servos;
 
     public void init(HardwareMap hardwareMap)
     {
@@ -58,37 +57,45 @@ public class SpaghettiHardware
     {
         liftMotor = hardwareMap.get(DcMotorEx.class, SpaghettiID.LIFT_MOTOR);
         liftMotor2 = hardwareMap.get(DcMotorEx.class, SpaghettiID.LIFT_MOTOR2);
+        //liftMotor3 = hardwareMap.get(DcMotorEx.class, SpaghettiID.LIFT_MOTOR3);
+        //liftMotor4 = hardwareMap.get(DcMotorEx.class, SpaghettiID.LIFT_MOTOR4);
+
 
         liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         liftMotor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        //liftMotor3.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        //liftMotor4.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
 
         // motors move in opposite direction
         liftMotor.setDirection(DcMotorEx.Direction.FORWARD);
+       //liftMotor3.setDirection(DcMotorEx.Direction.FORWARD);
         liftMotor2.setDirection(DcMotorEx.Direction.REVERSE);
+        //liftMotor4.setDirection(DcMotorEx.Direction.REVERSE);
+
 
         liftMotor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
         liftMotor2.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        //liftMotor3.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        //liftMotor4.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+
 
         liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         liftMotor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+       // liftMotor3.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        //liftMotor4.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         liftMotor.setPower(0);
         liftMotor2.setPower(0);
+        //liftMotor3.setPower(0);
+        //liftMotor4.setPower(0);
 
     }
     public void initializeClawServos(HardwareMap hardwareMap)
     {
-
-
         leftClaw = hardwareMap.get(Servo.class, SpaghettiID.LEFT_CLAW);
         rightClaw = hardwareMap.get(Servo.class, SpaghettiID.RIGHT_CLAW);
-        wheelServoL = hardwareMap.get(Servo.class, SpaghettiID.WHEEL_SERVOL);
-        wheelServoR = hardwareMap.get(Servo.class, SpaghettiID.WHEEL_SERVOR);
 
-        wheelServoL.setDirection(Servo.Direction.FORWARD);
-        wheelServoL.setPosition(.5);
-        wheelServoR.setDirection(Servo.Direction.REVERSE);
-        wheelServoR.setPosition(.5);
         leftClaw.setDirection(Servo.Direction.REVERSE);
         leftClaw.setPosition(0);
         rightClaw.setDirection(Servo.Direction.FORWARD);

@@ -14,7 +14,7 @@ public class CVPipeline extends OpenCvPipeline
     /**
      * Enum to define the possible destination for the robot
      */
-    private volatile int destination = 2;
+    private volatile int destination = 0;
 
     //magenta 1
     //yellow 2
@@ -44,7 +44,7 @@ public class CVPipeline extends OpenCvPipeline
     /**
      * Core values that define the location and size of the region
      */
-    static final Point REGION_TOPLEFT_POINT = new Point(45,70);  // x,y (top left corner of the window is (0,0))
+    static final Point REGION_TOPLEFT_POINT = new Point(100,270);  // x,y (top left corner of the window is (0,0))
     static final int REGION_WIDTH = 40;
     static final int REGION_HEIGHT = 55;
 
@@ -116,8 +116,6 @@ public class CVPipeline extends OpenCvPipeline
         // Compare all sums to each other and determine the biggest.
         int idx = -1;
         for(int i = 0; i< sums.length; i++) {
-
-
             boolean bigger = true;
             for (double s : sums) {
                 if (sums[i] < s) {
@@ -143,9 +141,9 @@ public class CVPipeline extends OpenCvPipeline
         /**
          * Update the destination depending on the color.
          */
-        if (idx==0) destination = 2;      // CENTER if YELLOW
-        else if (idx==1) destination = 3;  // RIGHT if CYAN
-        else destination = 1;            //LEFT if MAGENTA
+        if (idx==0) destination = 3; //right magenta
+        else if (idx==1) destination = 2; //center yellow
+        else destination = 1; //left cyan
 
 
         /**
