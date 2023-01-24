@@ -14,8 +14,8 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
 
-@Autonomous(name= "Left")
-public class Left extends LinearOpMode
+@Autonomous(name= "LeftMed")
+public class LeftMed extends LinearOpMode
 {
     //yellow location 2
     //magenta location 1
@@ -23,7 +23,7 @@ public class Left extends LinearOpMode
 
     private SampleMecanumDrive drive;
     private final Pose2d start = new Pose2d(-36,64,Math.toRadians(-90));
-    private TrajectorySequence toHigh, toCones, toJunc, moveUp, moveBack, adjust, adjust2,
+    private TrajectorySequence toMed, toCones, toJunc, moveUp, moveBack, adjust, adjust2,
             park1,park3;
 
     private OpenCvInternalCamera cam;
@@ -74,33 +74,19 @@ public class Left extends LinearOpMode
         function.moveLift(100); // init to low
         function.wait(630, telemetry);
         function.closeClaw();
-        function.wait(100, telemetry);
-        function.moveLift(-100); // low to init
-        function.wait(630, telemetry);
+        function.moveLift(-1000); // low to med
+        function.wait(2300, telemetry);
 
-        drive.followTrajectorySequence(toHigh);
-        function.moveLift(-1300); // init to high
-        function.wait(3700, telemetry);
+        drive.followTrajectorySequence(toMed);
         drive.followTrajectorySequence(moveUp);
+
         function.wait(200, telemetry);
         function.openClaw();
 
-        function.moveLift(1050); // high to cones
-        function.wait(3450, telemetry);
+        function.moveLift(600); // med to init
+        function.wait(1850, telemetry);
 
         drive.followTrajectorySequence(moveBack);
-        drive.followTrajectorySequence(toCones);
-
-
-        //function.moveLift(-1500);
-        //function.wait(3000,telemetry);
-        //function.closeClaw();
-        //function.wait(3000,telemetry);
-        //function.moveLift(-4600)
-        //function.wait(3000,telemetry);
-        //drive.followTrajectorySequence(toJunc);
-        //function.openClaw();
-
 
         if (location ==1)
             drive.followTrajectorySequence(park1);
@@ -123,12 +109,12 @@ public class Left extends LinearOpMode
                 .back(2)
                 .build();
 
-        toHigh = drive.trajectorySequenceBuilder(adjust2.end())
-                .forward(51)
+        toMed = drive.trajectorySequenceBuilder(adjust2.end())
+                .forward(26)
                 .turn(Math.toRadians(-47.2)) // left
                 .build();
 
-        moveUp = drive.trajectorySequenceBuilder(toHigh.end())
+        moveUp = drive.trajectorySequenceBuilder(toMed.end())
                 .forward(2.9)
                 .build();
 
@@ -146,12 +132,12 @@ public class Left extends LinearOpMode
                 .build();
 
         toCones = drive.trajectorySequenceBuilder(moveBack.end())
-                .forward(21)
+                .forward(22)
                 .build();
         toJunc = drive.trajectorySequenceBuilder(toCones.end())
                 .back(22)
-                .turn(Math.toRadians(-90))
-                .turn(Math.toRadians(47.2))
+                .turn(Math.toRadians(90))
+                .turn(Math.toRadians(-47.2))
                 .forward(2.8)
                 .build();
     }

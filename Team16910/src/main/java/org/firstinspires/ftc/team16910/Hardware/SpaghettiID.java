@@ -9,8 +9,8 @@ public class SpaghettiID {
 
     public static final String LIFT_MOTOR = "liftMotor";
     public static final String LIFT_MOTOR2 = "liftMotor2";
-    //public static final String LIFT_MOTOR3 = "liftMotor3";
-    //public static final String LIFT_MOTOR4 = "liftMotor4";
+    public static final String LIFT_MOTOR3 = "liftMotor3";
+    public static final String LIFT_MOTOR4 = "liftMotor4";
 
     //CLAW SERVOS
     public static final String LEFT_CLAW = "leftClaw";

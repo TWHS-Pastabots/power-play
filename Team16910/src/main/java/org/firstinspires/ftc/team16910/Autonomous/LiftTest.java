@@ -27,13 +27,23 @@ public class LiftTest extends LinearOpMode
         waitForStart();
         if(!opModeIsActive()) {return;}
 
-        function.halfClaw();
-        function.wait(1000, telemetry);
+        function.wait(100, telemetry);
 
-        function.moveLift(-4400);
-        function.wait(6800, telemetry);
-        function.moveLift(2000);
-        function.wait(3000, telemetry);
+       // function.moveLift(-1300); //high from init
+        // function.wait(3700, telemetry);
+
+       // function.moveLift(100); //init to low
+       // function.wait(630, telemetry);
+
+         function.moveLift(1200); //high to cone
+         function.wait(3550, telemetry);
+
+
+
+
+
+
+
 
 
 

@@ -5,9 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
 import org.firstinspires.ftc.team16910.Hardware.SpaghettiHardware;
-
 
 @TeleOp(name = "Spaghetti")
 public class Spaghetti extends OpMode
@@ -109,15 +107,11 @@ public class Spaghetti extends OpMode
     }
     private void moveLift()
     {
-        // Operator
-        if (gamepad2.dpad_up && buttonTime.time() >= 500)
-        {
-            hardware.liftMotor.setPower(-gamepad2.left_stick_y);
-            hardware.liftMotor2.setPower(-gamepad2.left_stick_y);
-        }
-
+            // Operator
             hardware.liftMotor.setPower(gamepad2.left_stick_y);
             hardware.liftMotor2.setPower(gamepad2.left_stick_y);
+            hardware.liftMotor3.setPower(gamepad2.left_stick_y);
+            hardware.liftMotor4.setPower(gamepad2.left_stick_y);
     }
 
     private void clawGrasp()

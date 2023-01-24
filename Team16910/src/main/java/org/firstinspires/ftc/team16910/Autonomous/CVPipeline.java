@@ -44,9 +44,9 @@ public class CVPipeline extends OpenCvPipeline
     /**
      * Core values that define the location and size of the region
      */
-    static final Point REGION_TOPLEFT_POINT = new Point(100,270);  // x,y (top left corner of the window is (0,0))
-    static final int REGION_WIDTH = 40;
-    static final int REGION_HEIGHT = 55;
+    static final Point REGION_TOPLEFT_POINT = new Point(80,230);  // x,y (top left corner of the window is (0,0))
+    static final int REGION_WIDTH = 25;
+    static final int REGION_HEIGHT = 70;
 
 
     /**

@@ -24,15 +24,26 @@ public class Functions
     {
         hardware.liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         hardware.liftMotor2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        hardware.liftMotor3.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        hardware.liftMotor4.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
 
         hardware.liftMotor.setTargetPosition(hardware.liftMotor.getCurrentPosition() + position);
         hardware.liftMotor2.setTargetPosition(hardware.liftMotor.getCurrentPosition() + position);
+        hardware.liftMotor3.setTargetPosition(hardware.liftMotor.getCurrentPosition() + position);
+        hardware.liftMotor4.setTargetPosition(hardware.liftMotor.getCurrentPosition() + position);
+
 
         hardware.liftMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         hardware.liftMotor2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        hardware.liftMotor3.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        hardware.liftMotor4.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+
 
         hardware.liftMotor.setPower(1);
         hardware.liftMotor2.setPower(1);
+        hardware.liftMotor3.setPower(1);
+        hardware.liftMotor4.setPower(1);
 
     }
     public void openClaw()
